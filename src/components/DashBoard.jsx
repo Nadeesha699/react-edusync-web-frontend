@@ -119,16 +119,19 @@ export default function DashBoard() {
       <div className=" w-full h-1/3">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={geoData}>
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="country" />
-      <YAxis />
-      <Tooltip />
-      <Bar dataKey="users">
-        {geoData.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-        ))}
-      </Bar>
-    </BarChart>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="country" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="users">
+              {geoData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Bar>
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
