@@ -10,6 +10,8 @@ import Report from "../components/Report";
 import Users from "../components/Users";
 import Profiles from "../components/Profiles";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Home = () => {
   const [routeNumber, setRouteNumber] = useState(0);
@@ -17,12 +19,14 @@ const Home = () => {
   const setRoute = (value) => {
     setRouteNumber(value);
   };
+
+  const navigate = useNavigate()
   return (
     <div className="flex flex-row h-dvh">
       <div className="w-1/6 flex flex-col justify-start">
         <img src={Logo} alt="logo-image" className="w-full h-1/5" />
         <div
-          className="flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-300 duration-300 ease-in cursor-pointer"
+          className="relative flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-300 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(2);
           }}
@@ -30,8 +34,9 @@ const Home = () => {
           <img
             src={Profile}
             alt="profile-icon"
-            className="rounded-full h-full"
+            className="rounded-full w-24 h-24 object-cover"
           />
+          <div className="bg-green-400 w-4 h-4 rounded-full absolute bottom-16 right-20"></div>
           <label className="font-bold">Nadeesha Ruwandima</label>
         </div>
         <div
@@ -70,10 +75,28 @@ const Home = () => {
           <MdSettings />
           <label>Settings</label>
         </div>
-        <div className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer">
-          <MdLogout />
-          <label>Logout</label>
-        </div>
+          <div
+            className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+            onClick={() => {
+              Swal.fire({
+                title: "Are you sure you want to logout?",
+                text: "You will need to log in again to access InsightBoard.",
+                icon:"warning",
+                showCancelButton: true,
+                cancelButtonText: "Stay",
+                confirmButtonText: "Logout",
+                confirmButtonColor:"#f97316",
+                cancelButtonColor:"#facc15"
+              }).then((e) => {
+                if (e.isConfirmed) {
+                  navigate("/login")
+                }
+              });
+            }}
+          >
+            <MdLogout />
+            <label>Logout</label>
+          </div>
       </div>
       <div className="w-5/6 bg-gray-200 ">
         {routeNumber === 0 ? (
