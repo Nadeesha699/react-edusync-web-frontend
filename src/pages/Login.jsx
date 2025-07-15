@@ -12,7 +12,7 @@ const Login = () => {
       className="w-full h-dvh bg-blend-multiply bg-black/80 bg-no-repeat bg-cover flex justify-center items-center"
       style={{ backgroundImage: `url(${BackgroundImage})` }}
     >
-      <div className="bg-white/25 w-1/4 h-2/4 flex flex-col  items-center gap-10 rounded-lg p-12">
+      <div className="bg-white/20 backdrop-blur-sm w-1/4 h-2/4 flex flex-col  items-center gap-10 rounded-lg p-12">
         <div className="flex flex-col text-center">
           <label className="text-black-900 font-bold text-4xl">
             Insight<span className="text-yellow-300">Board</span>

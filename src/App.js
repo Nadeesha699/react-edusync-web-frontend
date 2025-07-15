@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import AddAdmin from "./pages/AddAdmin";
 import ForgotPassword from "./pages/ForgotPassword";
+import UpdateUser from "./pages/UpdateUser";
 
 // inforamtion
 // https://chatgpt.com/c/684fa405-6f54-8011-bbb0-bcc56e71bb2a
@@ -22,6 +23,7 @@ function App() {
           <Route Component={Home} path="/"/>
           <Route Component={Login} path="/login"/>
           <Route Component={AddAdmin} path="/add-admin"/>
+          <Route Component={UpdateUser} path="/update-user"/>
           <Route Component={ForgotPassword} path="/forgot-password"/>
         </Routes>
       </BrowserRouter>
