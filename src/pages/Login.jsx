@@ -1,14 +1,47 @@
 import { useNavigate } from "react-router-dom";
+import BackgroundImage from "../images/login-background.png";
+import { MdEmail, MdLock } from "react-icons/md";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
+import { useState } from "react";
 
 const Login = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [eyeVisible, setEyeVisible] = useState(false);
   return (
-    <div className="w-full h-dvh bg-yellow-400 flex flex-row">
-      <div className="w-1/2 h-dvh bg-white-500"></div>
-      <div className="w-1/2 h-dvh bg-red-500">
-      <input placeholder="Email"/>
-      <input placeholder="Password" type="password" />
-      <button onClick={()=>{navigate('/')}}>login</button>
+    // <div className="bg-cover bg-center bg-no-repeat w-full h-dvh bg-blend-multiply" style={{backgroundImage:`url(${BackgroundImage})`}}>
+    <div
+      className="w-full h-dvh bg-blend-multiply bg-black/80 bg-no-repeat bg-cover flex justify-center items-center"
+      style={{ backgroundImage: `url(${BackgroundImage})` }}
+    >
+      <div className="bg-white/25 w-1/4 h-2/4 flex flex-col justify-between items-center gap-10 rounded-lg p-12">
+        <div className="flex flex-col text-center">
+          <label className="text-black-900 font-bold text-4xl">
+            Insight<span className="text-yellow-300">Board</span>
+          </label>
+          <label className="text-white">Welcoame Back</label>
+        </div>
+        <div className="flex flex-row justify-between items-center gap-2 bg-yellow-300 rounded-lg p-1">
+          <MdEmail />
+          <input className="bg-transparent focus:outline-none" />
+          <IoMdEye className="invisible" />
+        </div>
+        <div className="flex flex-row justify-between items-center gap-2 bg-yellow-300 rounded-lg p-1">
+          <MdLock />
+          <input
+            className="bg-transparent focus:outline-none"
+            type={eyeVisible ? "text" : "password"}
+          />
+          <div
+            onClick={() => {
+              setEyeVisible(!eyeVisible);
+            }}
+          >
+            {eyeVisible ? <IoMdEye /> : <IoMdEyeOff />}
+          </div>
+        </div>
+        <button className="font-bold w-36 rounded-md ring ring-white text-white hover:bg-yellow-300 hover:text-black hover:ring-yellow-300 duration-300 ease-in-out">
+          login
+        </button>
       </div>
     </div>
   );

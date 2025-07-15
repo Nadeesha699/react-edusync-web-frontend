@@ -13,6 +13,7 @@ import {
   BarChart,
   Cell,
 } from "recharts";
+import { useNavigate } from "react-router-dom";
 
 // Fake data for last 7 days
 const userData = [
@@ -42,11 +43,12 @@ const geoData = [
 const COLORS = ["#FF8042", "#ffcc00", "#ff005d"];
 
 export default function DashBoard() {
+  const navigate = useNavigate()
   return (
     <div className="bg-gray-100 w-full h-dvh p-10 flex flex-col gap-10">
       <div className="flex flex-row justify-between items-center">
         <label className="font-bold text-4xl">Dashboard</label>
-        <div className="bg-orange-400 flex flex-row p-2 rounded-full items-center gap-2 hover:bg-orange-200 duration-300 ease-in cursor-pointer">
+        <div className="bg-orange-400 flex flex-row p-2 rounded-full items-center gap-2 hover:bg-orange-200 duration-300 ease-in cursor-pointer" onClick={()=>{navigate('/add-admin')}}>
           <MdAdd />
           <label>Add Admin</label>
         </div>
