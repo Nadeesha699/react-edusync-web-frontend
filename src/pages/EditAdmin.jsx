@@ -92,7 +92,7 @@ export default function EditAdmin() {
           </div>
           <div className="flex flex-col justify-evenly items-center">
             <div
-              className="w-36 h-36  bg-no-repeat bg-cover flex justify-center items-center bg-black/40 rounded-full bg-blend-multiply duration-300 ease-in hover:bg-black/80"
+              className="w-48 h-48  bg-no-repeat bg-cover flex justify-center items-center bg-black/40 rounded-full bg-blend-multiply duration-300 ease-in hover:bg-black/80"
               style={{ backgroundImage: `url(${ProfileImage})` }}
             >
                 <BiCamera size={40} className="text-white"/>

@@ -1,10 +1,5 @@
 import BackgroundImage from "../images/login-background.png";
-import {
-  MdEmail,
-  MdLocationPin,
-  MdLock,
-  MdPerson,
-} from "react-icons/md";
+import { MdEmail, MdLocationPin, MdLock, MdPerson } from "react-icons/md";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
@@ -19,7 +14,13 @@ export default function AddAdmin() {
     >
       <div className="bg-white/20 backdrop-blur-sm w-2/4 h-4/5 flex flex-col  items-center rounded-lg p-12">
         <div className="flex flex-row justify-start items-center w-full gap-10">
-          <BiLeftArrowCircle size={50} className="text-black hover:text-white duration-300 ease-in-out" onClick={()=>{navigate("/")}}/>
+          <BiLeftArrowCircle
+            size={50}
+            className="text-black hover:text-white duration-300 ease-in-out"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
           <label className="font-bold text-2xl">Add Admin</label>
         </div>
         <div className="flex flex-row w-full justify-around">
@@ -81,11 +82,11 @@ export default function AddAdmin() {
             </div>
             <div className="flex flex-row justify-between items-center w-full">
               <button className="font-bold w-24 rounded-md ring ring-black text-black hover:bg-yellow-300  hover:ring-yellow-300 duration-300 ease-in-out">
-            save
-          </button> 
-            <button className="font-bold w-24 rounded-md ring ring-black text-black hover:bg-green-300 hover:ring-green-300 duration-300 ease-in-out">
-            clear
-          </button>
+                save
+              </button>
+              <button className="font-bold w-24 rounded-md ring ring-black text-black hover:bg-green-300 hover:ring-green-300 duration-300 ease-in-out">
+                clear
+              </button>
             </div>
           </div>
           <div className="flex flex-col justify-center items-start">
