@@ -22,13 +22,14 @@ const Login = () => {
         <div className="flex flex-col justify-between items-center h-full">
           <div className="flex flex-row justify-between items-center gap-2 bg-yellow-300 rounded-lg p-1">
             <MdEmail />
-            <input className="bg-transparent focus:outline-none" />
+            <input className="bg-transparent focus:outline-none placeholder:text-gray-700" placeholder="Email" />
             <IoMdEye className="invisible" />
           </div>
           <div className="flex flex-row justify-between items-center gap-2 bg-yellow-300 rounded-lg p-1">
             <MdLock />
             <input
-              className="bg-transparent focus:outline-none"
+              className="bg-transparent focus:outline-none placeholder:text-gray-700"
+              placeholder="Password"
               type={eyeVisible ? "text" : "password"}
             />
             <div

@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 
 const Home = () => {
   const [routeNumber, setRouteNumber] = useState(0);
+  const [ colors,setColor]= useState(0)
 
   const setRoute = (value) => {
     setRouteNumber(value);
@@ -26,10 +27,12 @@ const Home = () => {
       <div className="w-1/6 flex flex-col justify-start">
         <img src={Logo} alt="logo-image" className="w-full h-1/5" />
         <div
-          className="relative flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-300 duration-300 ease-in cursor-pointer"
+          className="relative flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-100 duration-300 ease-in cursor-pointer rounded-l-xl"
           onClick={() => {
             setRoute(2);
+            setColor(2)
           }}
+          style={{backgroundColor:colors===2?"#ffd900":""}}
         >
           <img
             src={Profile}
@@ -40,43 +43,51 @@ const Home = () => {
           <label className="font-bold">Nadeesha Ruwandima</label>
         </div>
         <div
-          className="hover:bg-yellow-300 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className=" rounded-l-xl hover:bg-yellow-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(0);
+            setColor(0);
           }}
+          style={{backgroundColor:colors===0?"#ffd900":""}}
         >
           <MdDashboard />
-          <label>Dashboard</label>
+          <label className="font-bold">Dashboard</label>
         </div>
         <div
-          className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className=" rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(1);
+            setColor(1);
           }}
+          style={{backgroundColor:colors===1?"#ffd900":""}}
         >
           <MdPeople />
-          <label>Users</label>
+          <label className="font-bold">Users</label>
         </div>
         <div
-          className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(3);
+            setColor(3);
           }}
+          style={{backgroundColor:colors===3?"#ffd900":""}}
         >
           <MdBarChart />
-          <label>Report</label>
+          <label className="font-bold">Report</label>
         </div>
         <div
-          className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(4);
+            setColor(4);
           }}
+          style={{backgroundColor:colors===4?"#ffd900":""}}
         >
           <MdSettings />
-          <label>Settings</label>
+          <label className="font-bold">Settings</label>
         </div>
           <div
-            className="hover:bg-yellow-300 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+            className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
             onClick={() => {
               Swal.fire({
                 title: "Are you sure you want to logout?",
@@ -95,7 +106,7 @@ const Home = () => {
             }}
           >
             <MdLogout />
-            <label>Logout</label>
+            <label className="font-bold">Logout</label>
           </div>
       </div>
       <div className="w-5/6 bg-gray-200 ">
