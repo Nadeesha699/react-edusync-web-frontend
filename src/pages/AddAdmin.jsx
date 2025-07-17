@@ -30,6 +30,7 @@ export default function AddAdmin() {
               <input
                 className="bg-transparent focus:outline-none placeholder:text-gray-700"
                 placeholder="Full Name"
+               
               />
               <IoMdEye className="invisible" />
             </div>

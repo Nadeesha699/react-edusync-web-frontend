@@ -6,6 +6,8 @@ import AddAdmin from "./pages/AddAdmin";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdateUser from "./pages/UpdateUser";
 import EditAdmin from "./pages/EditAdmin";
+import VerifyEmail from "./pages/VerifyEmail";
+import ResetPassword from "./pages/RestPassword";
 
 // inforamtion
 // https://chatgpt.com/c/684fa405-6f54-8011-bbb0-bcc56e71bb2a
@@ -21,12 +23,14 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route Component={Home} path="/"/>
-          <Route Component={Login} path="/login"/>
-          <Route Component={AddAdmin} path="/add-admin"/>
-          <Route Component={UpdateUser} path="/update-user"/>
-          <Route Component={ForgotPassword} path="/forgot-password"/>
-          <Route Component={EditAdmin} path="/update-profile"/>
+          <Route Component={Home} path="/" />
+          <Route Component={Login} path="/login" />
+          <Route Component={AddAdmin} path="/add-admin" />
+          <Route Component={UpdateUser} path="/update-user" />
+          <Route Component={ForgotPassword} path="/forgot-password" />
+          <Route Component={EditAdmin} path="/update-profile" />
+          <Route Component={VerifyEmail} path="/verify-email" />
+          <Route Component={ResetPassword} path="/reset-password"/>
         </Routes>
       </BrowserRouter>
     </>
