@@ -1,61 +1,65 @@
-import { MdAdd, MdAnimation } from "react-icons/md";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  CartesianGrid,
-  Pie,
-  PieChart,
-  Bar,
-  BarChart,
-  Cell,
-} from "recharts";
+import { MdAdd, MdCategory } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import BackgroundImage from "../images/login-background.png";
-
-// Fake data for last 7 days
-const userData = [
-  { date: "Jun 10", activeUsers: 120 },
-  { date: "Jun 11", activeUsers: 135 },
-  { date: "Jun 12", activeUsers: 98 },
-  { date: "Jun 13", activeUsers: 143 },
-  { date: "Jun 14", activeUsers: 170 },
-  { date: "Jun 15", activeUsers: 155 },
-  { date: "Jun 16", activeUsers: 190 },
-];
-
-const data = [
-  { name: "Desktop", value: 400 },
-  { name: "Mobile", value: 300 },
-  { name: "Tablet", value: 100 },
-];
-
-const geoData = [
-  { country: "India", users: 520 },
-  { country: "USA", users: 430 },
-  { country: "Germany", users: 210 },
-  { country: "Brazil", users: 165 },
-  { country: "Canada", users: 125 },
-];
-
-const COLORS = ["#FF8042", "#ffcc00", "#ff005d"];
+import { BiPackage} from "react-icons/bi";
+import { BsTruck } from "react-icons/bs";
+import Profile from "../images/profile.jpg"
 
 export default function DashBoard() {
   const navigate = useNavigate();
   return (
-    // <div className="bg-gray-100 w-full h-dvh p-10 flex flex-col gap-10">
     <div
-      className="w-full h-dvh  bg-no-repeat bg-cover relative"
-      style={{ backgroundImage: `url(${BackgroundImage})` }}
+      className="w-full h-dvh flex flex-col p-2 gap-2"
     >
-      <div className="bg-white/20 backdrop-blur-md p-10 flex flex-col gap-10 absolute inset-0">
-        <div className="flex flex-row justify-between items-center">
+      <div  className="flex flex-row justify-end items-center w-full bg-white rounded-full p-2">
+        <div className="flex flex-row bg-gray-200 p-2 rounded-full gap-2">
+          <img src={Profile} alt="profole" className="w-12 h-12 rounded-full"/>
+          <div className="flex flex-col">
+            <label className="font-bold text-xs">Nadeesha Ruwandima</label>
+            <label className="text-gray-500 text-xs">nadeesharuwandima@gmail.com</label>
+          </div>
+        </div>
+      </div>
+      <div className="flex-col flex bg-white rounded-3xl p-2 w-full h-full gap-10">
+        <div className="flex flex-row justify-between">
+         <label className="font-bold text-4xl">Dashboard</label>
+         <div
+            className="flex flex-row items-center justify-center gap-2 bg-gray-200 rounded-3xl p-2"
+            onClick={() => {
+              navigate("/add-admin");
+            }}
+          >
+            <MdAdd />
+            <label className="font-bold">Add Admin</label>
+          </div>
+        </div>
+        <div className="flex flex-row w-full h-1/4 gap-2">
+          <div className="flex flex-col w-1/3 p-2 bg-yellow-200 justify-between rounded-3xl">
+            <div className="flex flex-row justify-between ">
+              <label className="font-bold text-3xl">Products</label>
+              <BiPackage className="text-3xl"/>
+            </div>
+            <label className="font-bold text-6xl text-white">200</label>
+          </div>
+          <div className="flex flex-col w-1/3 p-2 bg-gray-800 justify-between rounded-3xl">
+            <div className="flex flex-row justify-between ">
+              <label className="font-bold text-3xl text-white">Category</label>
+              <MdCategory className="text-3xl text-white"/>
+            </div>
+            <label className="font-bold text-6xl text-white">20</label>
+          </div>
+          <div className="flex flex-col w-1/3 p-2 bg-gray-800 justify-between rounded-3xl">
+            <div className="flex flex-row justify-between ">
+              <label className="font-bold text-3xl text-white">Suppliers</label>
+              <BsTruck className="text-3xl text-white"/>
+            </div>
+            <label className="font-bold text-6xl text-white">10</label>
+          </div>
+        </div>
+      </div>
+        {/* <div className="flex flex-row justify-between items-center">
           <label className="font-bold text-4xl">Dashboard</label>
           <div
-            className="bg-orange-400 flex flex-row p-2 rounded-full items-center gap-2 hover:bg-orange-200 duration-300 ease-in cursor-pointer"
+            className=""
             onClick={() => {
               navigate("/add-admin");
             }}
@@ -63,91 +67,31 @@ export default function DashBoard() {
             <MdAdd />
             <label>Add Admin</label>
           </div>
+          <img src={Profile} alt="profile" className="w-24 h-24"/>
         </div>
         <div className="flex flex-row justify-between">
           <div className="bg-yellow-200 flex flex-row items-center p-5 w-1/6 justify-between rounded-lg">
             <div className="flex flex-col">
-              <label className="font-bold text-3xl">120k</label>
-              <label>Users</label>
+              <label className="font-bold text-3xl">4000</label>
+              <label>Products</label>
             </div>
-            <MdAnimation />
+            <BiPackage/>
           </div>
           <div className="bg-yellow-400 flex flex-row items-center p-5 w-1/6 justify-between rounded-lg">
             <div className="flex flex-col ">
-              <label className="font-bold text-3xl">20k</label>
-              <label>Employees</label>
+              <label className="font-bold text-3xl">4</label>
+              <label>Categories</label>
             </div>
-            <MdAnimation />
-          </div>
-          <div className="bg-yellow-300 flex flex-row items-center p-5 w-1/6 justify-between rounded-lg">
-            <div className="flex flex-col ">
-              <label className="font-bold text-3xl">50k</label>
-              <label>Students</label>
-            </div>
-            <MdAnimation />
+            <MdCategory />
           </div>
           <div className="bg-yellow-500 flex flex-row items-center p-5 w-1/6 justify-between rounded-lg">
             <div className="flex flex-col ">
-              <label className="font-bold text-3xl">100k</label>
-              <label>Admins</label>
+              <label className="font-bold text-3xl">40</label>
+              <label>Suppliers</label>
             </div>
-            <MdAnimation />
+            <BsTruck />
           </div>
-        </div>
-        <div className=" w-full h-1/3 flex flex-row justify-between">
-          <ResponsiveContainer width="100%" height="80%">
-            <LineChart data={userData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
-              <YAxis />
-              <Tooltip />
-              <Line
-                type="monotone"
-                dataKey="activeUsers"
-                stroke="orange"
-                strokeWidth={4}
-                dot={{ r: 5 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          <PieChart width={300} height={300}>
-            <Pie
-              dataKey="value"
-              data={data}
-              cx="50%"
-              cy="50%"
-              outerRadius={100}
-              label
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
-              ))}
-            </Pie>
-            <Tooltip />
-          </PieChart>
-        </div>
-        <div className=" w-full h-1/3">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={geoData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="country" />
-              <YAxis />
-              <Tooltip />
-              <Bar dataKey="users">
-                {geoData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={COLORS[index % COLORS.length]}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+        </div> */}
       </div>
-    </div>
   );
 }

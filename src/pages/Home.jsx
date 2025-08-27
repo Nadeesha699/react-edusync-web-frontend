@@ -26,7 +26,7 @@ const Home = () => {
     <div className="flex flex-row h-dvh">
       <div className="w-1/6 flex flex-col justify-start">
         <img src={Logo} alt="logo-image" className="w-full h-1/5" />
-        <div
+        {/* <div
           className="relative flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-100 duration-300 ease-in cursor-pointer rounded-l-xl"
           onClick={() => {
             setRoute(2);
@@ -41,7 +41,7 @@ const Home = () => {
           />
           <div className="bg-green-400 w-4 h-4 rounded-full absolute bottom-16 right-20"></div>
           <label className="font-bold">Nadeesha Ruwandima</label>
-        </div>
+        </div> */}
         <div
           className=" rounded-l-xl hover:bg-yellow-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
