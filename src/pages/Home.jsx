@@ -1,17 +1,13 @@
-import { MdDashboard, MdLogout } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import { MdPeople } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
-import { MdBarChart } from "react-icons/md";
-import Logo from "../images/insightboard.png";
-import Profile from "../images/profile.jpg";
-import DashBoard from "../components/DashBoard";
+import AddMarks from "../components/AddMarks";
 import Setting from "../components/Setting";
-import Report from "../components/Report";
-import Users from "../components/Users";
-import Profiles from "../components/Profiles";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import StudentsMarks from "../components/StudentsMarks";
+import { FaPlus } from "react-icons/fa6";
 
 const Home = () => {
   const [routeNumber, setRouteNumber] = useState(0);
@@ -23,65 +19,37 @@ const Home = () => {
 
   const navigate = useNavigate()
   return (
-    <div className="flex flex-row h-dvh">
-      <div className="w-1/6 flex flex-col justify-start">
-        <img src={Logo} alt="logo-image" className="w-full h-1/5" />
-        {/* <div
-          className="relative flex flex-col justify-center items-center h-1/4 p-10 hover:bg-yellow-100 duration-300 ease-in cursor-pointer rounded-l-xl"
-          onClick={() => {
-            setRoute(2);
-            setColor(2)
-          }}
-          style={{backgroundColor:colors===2?"#ffd900":""}}
-        >
-          <img
-            src={Profile}
-            alt="profile-icon"
-            className="rounded-full w-24 h-24 object-cover"
-          />
-          <div className="bg-green-400 w-4 h-4 rounded-full absolute bottom-16 right-20"></div>
-          <label className="font-bold">Nadeesha Ruwandima</label>
-        </div> */}
+    <div className="flex flex-row h-dvh bg-slate-700">
+      <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl mr-5">
         <div
-          className=" rounded-l-xl hover:bg-yellow-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className=" rounded-l-2xl hover:bg-amber-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(0);
             setColor(0);
           }}
-          style={{backgroundColor:colors===0?"#ffd900":""}}
+          style={{backgroundColor:colors===0?"#FBBF24":""}}
         >
-          <MdDashboard />
-          <label className="font-bold">Dashboard</label>
+          <FaPlus />
+          <label className="font-bold">Add Marks</label>
         </div>
         <div
-          className=" rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className=" rounded-l-2xl hover:bg-amber-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(1);
             setColor(1);
           }}
-          style={{backgroundColor:colors===1?"#ffd900":""}}
+          style={{backgroundColor:colors===1?"#FBBF24":""}}
         >
           <MdPeople />
-          <label className="font-bold">Users</label>
+          <label className="font-bold">Students Marks</label>
         </div>
         <div
-          className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {
-            setRoute(3);
-            setColor(3);
-          }}
-          style={{backgroundColor:colors===3?"#ffd900":""}}
-        >
-          <MdBarChart />
-          <label className="font-bold">Report</label>
-        </div>
-        <div
-          className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          className="rounded-l-2xl hover:bg-amber-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             setRoute(4);
             setColor(4);
           }}
-          style={{backgroundColor:colors===4?"#ffd900":""}}
+          style={{backgroundColor:colors===4?"#FBBF24":""}}
         >
           <MdSettings />
           <label className="font-bold">Settings</label>
@@ -96,8 +64,8 @@ const Home = () => {
                 showCancelButton: true,
                 cancelButtonText: "Stay",
                 confirmButtonText: "Logout",
-                confirmButtonColor:"#f97316",
-                cancelButtonColor:"#facc15"
+                confirmButtonColor:"#FBBF24",
+                cancelButtonColor:"#ff8400ff"
               }).then((e) => {
                 if (e.isConfirmed) {
                   navigate("/login")
@@ -109,16 +77,12 @@ const Home = () => {
             <label className="font-bold">Logout</label>
           </div>
       </div>
-      <div className="w-5/6 bg-gray-200 ">
+      <div className="w-5/6 bg-transparent ">
         {routeNumber === 0 ? (
-          <DashBoard />
+          <AddMarks />
         ) : routeNumber === 1 ? (
-          <Users />
-        ) : routeNumber === 2 ? (
-          <Profiles />
-        ) : routeNumber === 3 ? (
-          <Report />
-        ) : routeNumber === 4 ? (
+          <StudentsMarks />
+        ) :  routeNumber === 4 ? (
           <Setting />
         ) : (
           ""
