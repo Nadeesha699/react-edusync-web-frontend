@@ -1,6 +1,5 @@
-import { FaUser } from "react-icons/fa";
-import { FaIdBadge, FaPaperPlane } from "react-icons/fa6";
-import { MdAssignment, MdClear } from "react-icons/md";
+import { LuCalculator, LuIdCard, LuSend, LuUser } from "react-icons/lu";
+import { MdClear } from "react-icons/md";
 
 export default function AddMarks() {
   return (
@@ -11,7 +10,7 @@ export default function AddMarks() {
         </label>
         <label className="font-bold text-gray-500">Index Number</label>
         <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
-          <FaIdBadge />
+          <LuIdCard />
           <input
             placeholder="e.g. 1045"
             type="text"
@@ -21,7 +20,7 @@ export default function AddMarks() {
         </div>
         <label className="font-bold text-gray-500">Student Name</label>
         <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
-          <FaUser />
+          <LuUser />
           <input
             placeholder="e.g. Kamal Perera"
             type="text"
@@ -31,7 +30,7 @@ export default function AddMarks() {
         </div>
         <label className="font-bold text-gray-500">Student Marks</label>
         <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
-          <MdAssignment />
+          <LuCalculator />
           <input
             placeholder="e.g. 87"
             type="number"
@@ -41,7 +40,7 @@ export default function AddMarks() {
         </div>
         <div className="flex flex-row gap-5 justify-start">
           <div className="bg-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4 text-white">
-            <FaPaperPlane />
+            <LuSend />
             <label className="font-bold">submit</label>
           </div>
           <div className="bg-white text-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4">
