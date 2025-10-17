@@ -16,31 +16,25 @@ export default function UpdateStudent() {
         <label className="font-bold text-amber-400 text-5xl">
           U<span className="text-slate-700">pdate Student</span>{" "}
         </label>
-        <label className="font-bold text-gray-500">Index Number</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuIdCard />
           <input
-            placeholder="e.g. 1045"
             type="text"
             className="w-full border-none focus:outline-none"
             min="0"
           />
         </div>
-        <label className="font-bold text-gray-500">Student Name</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuUser />
           <input
-            placeholder="e.g. Kamal Perera"
             type="text"
             className="w-full border-none focus:outline-none"
             min="0"
           />
         </div>
-        <label className="font-bold text-gray-500">Student Marks</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuCalculator />
           <input
-            placeholder="e.g. 87"
             type="number"
             className="w-full border-none focus:outline-none"
             min="0"

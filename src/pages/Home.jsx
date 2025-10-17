@@ -2,7 +2,6 @@ import { MdLogout } from "react-icons/md";
 import { MdPeople } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import AddMarks from "../components/AddMarks";
-import Setting from "../components/Setting";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -43,17 +42,6 @@ const Home = () => {
           <MdPeople />
           <label className="font-bold">Students Marks</label>
         </div>
-        <div
-          className="rounded-l-2xl hover:bg-amber-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {
-            setRoute(4);
-            setColor(4);
-          }}
-          style={{backgroundColor:colors===4?"#FBBF24":""}}
-        >
-          <MdSettings />
-          <label className="font-bold">Settings</label>
-        </div>
           <div
             className="rounded-l-xl hover:bg-yellow-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
             onClick={() => {
@@ -82,9 +70,7 @@ const Home = () => {
           <AddMarks />
         ) : routeNumber === 1 ? (
           <StudentsMarks />
-        ) :  routeNumber === 4 ? (
-          <Setting />
-        ) : (
+        ) :  (
           ""
         )}
       </div>

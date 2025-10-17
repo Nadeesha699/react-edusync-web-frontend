@@ -21,25 +21,25 @@ export default function Login() {
             L<span className="text-slate-700">ogin</span>{" "}
           </label>
         </div>
-        <label className="font-bold text-gray-500">Email</label>
         <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuMail />
           <input
+          placeholder="Email"
             type="email"
             className="w-full border-none focus:outline-none"
           />
         </div>
-        <label className="font-bold text-gray-500">Password</label>
         <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuLock />
           <input
+          placeholder="Password"
             type={eyehide?"text":"password"}
             className="w-full border-none focus:outline-none"
           />
           {eyehide ? <LuEye onClick={()=>{setEyeHide(false)}} /> : <LuEyeOff onClick={()=>{setEyeHide(true)}}/>}
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
-          <div className="bg-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white">
+          <div className="bg-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white" onClick={()=>{navigate("/home")}}>
             <LuLogIn />
             <label className="font-bold">sign up</label>
           </div>

@@ -3,36 +3,33 @@ import { MdClear } from "react-icons/md";
 
 export default function AddMarks() {
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center pr-5 pt-5 pb-5">
-      <div className="bg-gray-300 w-1/2 rounded-lg p-5 flex flex-col gap-5">
+    <div className="w-full h-dvh pr-5 pt-5 pb-5">
+      <div className="bg-gray-300 w-full rounded-lg p-5 flex flex-col gap-5">
         <label className="font-bold text-amber-400 text-5xl">
           A<span className="text-slate-700">dd Marks</span>{" "}
         </label>
-        <label className="font-bold text-gray-500">Index Number</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuIdCard />
           <input
-            placeholder="e.g. 1045"
+            placeholder="Index Number"
             type="text"
             className="w-full border-none focus:outline-none"
             min="0"
           />
         </div>
-        <label className="font-bold text-gray-500">Student Name</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuUser />
           <input
-            placeholder="e.g. Kamal Perera"
+            placeholder="Student Name"
             type="text"
             className="w-full border-none focus:outline-none"
             min="0"
           />
         </div>
-        <label className="font-bold text-gray-500">Student Marks</label>
-        <div className="bg-white p-5 flex flex-row items-center justify-start gap-5 rounded-lg">
+        <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuCalculator />
           <input
-            placeholder="e.g. 87"
+            placeholder="Student Marks"
             type="number"
             className="w-full border-none focus:outline-none"
             min="0"

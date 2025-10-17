@@ -23,10 +23,10 @@ export default function ChangePassword() {
             C<span className="text-slate-700">hange Password</span>{" "}
           </label>
         </div>
-        <label className="font-bold text-gray-500">New Password</label>
         <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuLock />
           <input
+          placeholder="New Password"
             type={eyehide1 ? "text" : "password"}
             className="w-full border-none focus:outline-none"
           />
@@ -44,10 +44,10 @@ export default function ChangePassword() {
             />
           )}
         </div>
-        <label className="font-bold text-gray-500">Confirm Password</label>
         <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuLock />
           <input
+          placeholder="Confirm Password"
             type={eyehide2 ? "text" : "password"}
             className="w-full border-none focus:outline-none"
           />

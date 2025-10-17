@@ -17,10 +17,10 @@ export default function SendOtp() {
           S<span className="text-slate-700">end OTP</span>{" "}
         </label>
         </div>
-        <label className="font-bold text-gray-500">Your Email</label>
         <div className="bg-white p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuMail />
           <input
+          placeholder="Enter Registered Your Email"
             type="email"
             className="w-full border-none focus:outline-none"
           />

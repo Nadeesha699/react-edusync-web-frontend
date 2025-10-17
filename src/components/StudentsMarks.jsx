@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { BiTrash } from "react-icons/bi";
+import { BiExport, BiTrash } from "react-icons/bi";
+import { FcExport } from "react-icons/fc";
+import { LuSearch } from "react-icons/lu";
 import { MdSearch, MdUpdate } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -41,8 +43,9 @@ export default function StudentsMarks() {
           <label className="font-bold text-5xl text-amber-400">
             S<span className="text-slate-700">tudent Marks</span>
           </label>
-          <div className="bg-white flex flex-row rounded-full items-center duration-300 ease-in cursor-pointer w-1/4 p-5 gap-5">
-            <MdSearch />
+          <div className="flex flex-row w-1/3 gap-5">
+          <div className="bg-white flex flex-row rounded-full items-center duration-300 ease-in cursor-pointer w-full p-2 gap-2">
+            <LuSearch />
             <input
               className="w-full bg-transparent focus:outline-none focus:ring-0"
               value={searchTxt}
@@ -51,6 +54,11 @@ export default function StudentsMarks() {
                 setSearchTxt(e.target.value);
               }}
             />
+          </div>
+          <div className="bg-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 text-white">
+                      <BiExport/>
+                      <label className="font-bold">export data</label>
+                    </div>
           </div>
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide">
