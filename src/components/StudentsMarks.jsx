@@ -38,13 +38,13 @@ export default function StudentsMarks() {
   const [searchTxt, setSearchTxt] = useState("");
   return (
     <div className="w-full h-dvh pr-5 pt-5 pb-5">
-      <div className="bg-gray-300 w-full h-full rounded-lg p-5 flex flex-col gap-5">
+      <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
         <div className="flex flex-row justify-between items-center">
-          <label className="font-bold text-5xl text-amber-400">
-            S<span className="text-slate-700">tudent Marks</span>
+          <label className="font-bold text-5xl text-gray-500">
+            Student<span className="text-blue-700"> Marks</span>
           </label>
           <div className="flex flex-row w-1/3 gap-5">
-          <div className="bg-white flex flex-row rounded-full items-center duration-300 ease-in cursor-pointer w-full p-2 gap-2">
+          <div className="ring-blue-700 ring-1 flex flex-row rounded-full items-center duration-300 ease-in cursor-pointer w-full p-2 gap-2">
             <LuSearch />
             <input
               className="w-full bg-transparent focus:outline-none focus:ring-0"
@@ -55,14 +55,14 @@ export default function StudentsMarks() {
               }}
             />
           </div>
-          <div className="bg-slate-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 text-white">
+          <div className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 text-white">
                       <BiExport/>
                       <label className="font-bold">export data</label>
                     </div>
           </div>
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide">
-          <div className="w-full flex flex-row justify-between border-b-2 border-slate-700 text-amber-400">
+          <div className="w-full flex flex-row justify-between border-b-2 border-slate-700 text-blue-700">
             <label className="w-1/6 text-center p-2 font-bold">
               Index Number
             </label>
