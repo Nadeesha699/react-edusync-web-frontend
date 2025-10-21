@@ -47,8 +47,8 @@ const Home = () => {
           className="rounded-l-xl hover:bg-blue-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
             Swal.fire({
-              title: "Are you sure you want to logout?",
-              text: "You will need to log in again to access InsightBoard.",
+              title:"EduSync ICT",
+              text: "Are you sure you want to logout ? ",
               icon: "warning",
               showCancelButton: true,
               cancelButtonText: "Stay",

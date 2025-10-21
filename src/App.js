@@ -8,6 +8,7 @@ import SendOtp from "./pages/SendOtp";
 import ChangePassword from "./pages/ChangePassword";
 import FindResult from "./pages/FindResult";
 import Intro from "./pages/Intro";
+ import { ToastContainer} from 'react-toastify';
 
 //tailwindcss add
 // https://v3.tailwindcss.com/docs/guides/create-react-app
@@ -29,6 +30,7 @@ function App() {
           <Route Component={ChangePassword} path="/change-password"/>
           <Route Component={FindResult} path="/find-result"/>
         </Routes>
+                <ToastContainer/>
       </BrowserRouter>
     </>
   );
