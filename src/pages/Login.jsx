@@ -11,8 +11,10 @@ export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const login = (e) => {
+    setLoading(true);
     e.preventDefault();
     axios
       .post(`http://127.0.0.1:5000/api/teachers/login`, {
@@ -20,15 +22,19 @@ export default function Login() {
         password: password,
       })
       .then((e1) => {
-        toast.success("user login success !");
+        toast.success("Login successful! Welcome back 👋");
         navigate(`/home?user_id?${btoa(e1.data.user_id)}`);
       })
       .catch((e) => {
         if (e.status === 401) {
-          toast.error("wrong candidate !");
+          toast.error("Incorrect credentials. Please check your details and try again.");
         } else if (e.status === 500) {
-          toast.error("network connection error !");
+          toast.error("Server connection issue. Please try again in a moment.");
         }
+      }).finally(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   };
 
@@ -94,11 +100,40 @@ export default function Login() {
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
           <button
+            disabled={loading}
             type="submit"
-            className="bg-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white duration-300 ease-in hover:bg-blue-800"
+            className="bg-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white duration-300 ease-in hover:bg-blue-800 font-bold"
           >
-            <LuLogIn />
-            <label className="font-bold">sign up</label>
+            {loading ? (
+              <>
+                <svg
+                  className="mr-3 w-5 h-5 animate-spin text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                signing…
+              </>
+            ) : (
+              <>
+                <LuLogIn />
+                sign up
+              </>
+            )}
           </button>
           <label
             className="text-blue-700 underline underline-offset-2 text-sm mt-1"
@@ -106,7 +141,7 @@ export default function Login() {
               navigate("/send-otp");
             }}
           >
-            forgot password
+            forgot password ?
           </label>
         </div>
       </form>

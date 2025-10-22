@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const [eyehide1, setEyeHide1] = useState(false);
   const [eyehide2, setEyeHide2] = useState(false);
   const [newPassword, setNewPassword] = useState("");
@@ -16,6 +16,7 @@ export default function ChangePassword() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -33,6 +34,7 @@ export default function ChangePassword() {
   };
 
   const changePassword = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     axios
@@ -48,11 +50,16 @@ export default function ChangePassword() {
         }
       )
       .then(() => {
-        navigate("/login")
-        toast.success("password changed successfull !");
+        navigate("/login");
+        toast.success("Success! Your password has been updated ✅");
       })
       .catch(() => {
-        toast.error("connection failed !");
+        toast.error("Server connection issue. Please try again in a moment.");
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       });
   };
 
@@ -131,11 +138,39 @@ export default function ChangePassword() {
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
           <button
-            className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white"
+            className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white font-bold"
             type="submit"
           >
-            <MdUpdate />
-            <label className="font-bold">update password</label>
+            {loading ? (
+              <>
+                <svg
+                  className="mr-3 w-5 h-5 animate-spin text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                updating…
+              </>
+            ) : (
+              <>
+                <MdUpdate />
+                update password
+              </>
+            )}
           </button>
           <div className="flex flex-row gap-2 justify-center items-center">
             <div className="bg-blue-300 p-1 rounded-full"></div>
