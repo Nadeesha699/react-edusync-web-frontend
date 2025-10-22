@@ -19,7 +19,7 @@ export default function UpdateStudent() {
 
   async function loadData() {
     const result = await axios.get(
-      `http://127.0.0.1:5000/api/studentmarks/get-by-id/${searchParams.get("id")}`
+      `http://127.0.0.1:5000/api/studentmarks/get-by-id/${atob(searchParams.get("id"))}`
     );
     setIndex(result.data[0].student_index)
     setName(result.data[0].student_name)
@@ -28,7 +28,7 @@ export default function UpdateStudent() {
 
  async function updateMarks(e) {
   e.preventDefault();
-    await axios.put(`http://127.0.0.1:5000/api/studentmarks/update-by-id/${searchParams.get("id")}`, {
+    await axios.put(`http://127.0.0.1:5000/api/studentmarks/update-by-id/${atob(searchParams.get("id"))}`, {
       student_index: index,
       student_name: name,
       marks: marks,

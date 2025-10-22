@@ -19,9 +19,9 @@ export default function Login() {
         email: email,
         password: password,
       })
-      .then(() => {
+      .then((e1) => {
         toast.success("user login success !");
-        navigate("/home");
+        navigate(`/home?user_id?${btoa(e1.data.user_id)}`);
       })
       .catch((e) => {
         if (e.status === 401) {

@@ -132,7 +132,8 @@ export default function StudentsMarks() {
                         <MdUpdate
                           className="text-green-500 hover:text-black duration-300 ease-in-out"
                           onClick={() => {
-                            navigate(`/update-student?id=${e.id}`);
+                            const encodeId = btoa(e.id)
+                            navigate(`/update-student?id=${encodeId}`);
                           }}
                         />
                         <BiTrash
