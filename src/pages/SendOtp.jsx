@@ -17,13 +17,21 @@ export default function SendOtp() {
         email: email,
       })
       .then((e) => {
-        if (e.data.verify) {
+        if (e.data) {
           axios
             .post(`http://127.0.0.1:5000/api/email/send_otp`, {
               receiver_email: email,
             })
-            .then((e) => {
-              navigate("/verify-otp",{otp:e.data.otp})
+            .then((e1) => {
+              const otpData = {
+                value: e1.data.otp,
+                expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
+                // expiry: Date.now() + 10 * 1000,
+              };
+              sessionStorage.setItem("otp", JSON.stringify(otpData));
+              navigate(
+                `/verify-otp?email=${btoa(email)}&id=${btoa(e.data.id)}`
+              );
             })
             .catch((e) => {
               toast.error("network connection error !");

@@ -101,7 +101,7 @@ export default function Login() {
             <label className="font-bold">sign up</label>
           </button>
           <label
-            className="text-blue-700 underline underline-offset-2"
+            className="text-blue-700 underline underline-offset-2 text-sm mt-1"
             onClick={() => {
               navigate("/send-otp");
             }}
