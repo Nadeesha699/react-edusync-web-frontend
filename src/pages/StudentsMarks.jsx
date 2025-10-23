@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
-import { BiExport, BiMenu, BiTrash } from "react-icons/bi";
+import { BiExport, BiTrash } from "react-icons/bi";
 import { LuFileX, LuMenu, LuSearch } from "react-icons/lu";
 import { MdUpdate } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { FaPlus } from "react-icons/fa6";
+import logo from "../images/logo.png";
+import { MdClear, MdPeople, MdLogout } from "react-icons/md";
 
 export default function StudentsMarks() {
   const navigate = useNavigate();
@@ -17,6 +20,8 @@ export default function StudentsMarks() {
       student_index: "",
     },
   ]);
+  const [showMenu, setShowMenu] = useState(false);
+   const [searchParams] = useSearchParams();
 
   useEffect(() => {
     loadData();
@@ -32,7 +37,13 @@ export default function StudentsMarks() {
   return (
     <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
       <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
-        <LuMenu size={40} className="text-blue-700 block lg:hidden"/>  
+        <LuMenu
+          size={40}
+          className="text-blue-700 block lg:hidden"
+          onClick={() => {
+            setShowMenu(true);
+          }}
+        />
         <div className="flex flex-row justify-between items-center">
           <label className="font-bold text-5xl text-gray-500">
             Student<span className="text-blue-700"> Marks</span>
@@ -133,7 +144,7 @@ export default function StudentsMarks() {
                         <MdUpdate
                           className="text-green-500 hover:text-black duration-300 ease-in-out"
                           onClick={() => {
-                            const encodeId = btoa(e.id)
+                            const encodeId = btoa(e.id);
                             navigate(`/update-student?id=${encodeId}`);
                           }}
                         />
@@ -165,6 +176,64 @@ export default function StudentsMarks() {
                 })}
             </>
           )}
+        </div>
+      </div>
+      <div
+        className={`bg-white left-0 right-0 bottom-0 top-0 fixed flex flex-col gap-5 justify-start items-center p-5 transition-transform duration-700 ease-in-out ${
+          showMenu ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <img src={logo} alt="icon" className="h-1/4 w-1/2" />
+        <div
+          className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
+          onClick={() => {
+            setShowMenu(false);
+            navigate(`/home?user_id=${searchParams.get("user_id")}`);
+          }}
+        >
+          <FaPlus />
+          Add Marks
+        </div>
+        <div
+          className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
+          onClick={() => {
+            setShowMenu(false);
+            navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
+          }}
+        >
+          <MdPeople />
+          Students Marks
+        </div>
+        <div
+          className=" p-2 w-full flex flex-row justify-center items-center gap-2 duration-300 ease-in cursor-pointer bg-blue-700 text-white rounded-full hover:bg-blue-800 font-bold"
+          onClick={() => {
+            Swal.fire({
+              title: "EduSync ICT",
+              text: "Are you sure you want to logout ? ",
+              icon: "warning",
+              showCancelButton: true,
+              cancelButtonText: "Stay",
+              confirmButtonText: "Logout",
+              confirmButtonColor: "#1D4ED8",
+              cancelButtonColor: "#7590dcff",
+            }).then((e) => {
+              if (e.isConfirmed) {
+                navigate("/login");
+              }
+            });
+          }}
+        >
+          <MdLogout />
+          logout
+        </div>
+        <div
+          className=" p-2 w-full flex flex-row justify-center items-center gap-2 duration-300 ease-in cursor-pointer ring-blue-700 ring-1  text-blue-700 rounded-full font-bold"
+          onClick={() => {
+            setShowMenu(false);
+          }}
+        >
+          <MdClear />
+          cancel
         </div>
       </div>
     </div>

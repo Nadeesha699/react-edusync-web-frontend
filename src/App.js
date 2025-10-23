@@ -8,7 +8,8 @@ import SendOtp from "./pages/SendOtp";
 import ChangePassword from "./pages/ChangePassword";
 import FindResult from "./pages/FindResult";
 import Intro from "./pages/Intro";
- import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import StudentsMarks from "./pages/StudentsMarks";
 
 //tailwindcss add
 // https://v3.tailwindcss.com/docs/guides/create-react-app
@@ -22,15 +23,16 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route Component={Intro} path="/" />
-          <Route Component={Home} path="/home"/>
-          <Route Component={UpdateStudent} path="/update-student"/>
-          <Route Component={Login} path="/login"/>
-          <Route Component={VerifyOtp} path="/verify-otp"/>
-          <Route Component={SendOtp} path="/send-otp"/>
-          <Route Component={ChangePassword} path="/change-password"/>
-          <Route Component={FindResult} path="/find-result"/>
+          <Route Component={Home} path="/home" />
+          <Route Component={UpdateStudent} path="/update-student" />
+          <Route Component={Login} path="/login" />
+          <Route Component={VerifyOtp} path="/verify-otp" />
+          <Route Component={SendOtp} path="/send-otp" />
+          <Route Component={ChangePassword} path="/change-password" />
+          <Route Component={FindResult} path="/find-result" />
+          <Route Component={StudentsMarks} path="/student-marks" />
         </Routes>
-                <ToastContainer/>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

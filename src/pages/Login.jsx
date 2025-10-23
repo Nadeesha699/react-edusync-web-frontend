@@ -23,7 +23,7 @@ export default function Login() {
       })
       .then((e1) => {
         toast.success("Login successful! Welcome back 👋");
-        navigate(`/home?user_id?${btoa(e1.data.user_id)}`);
+        navigate(`/home?user_id=${btoa(e1.data.user_id)}`);
       })
       .catch((e) => {
         if (e.status === 401) {
