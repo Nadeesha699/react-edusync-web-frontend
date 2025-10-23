@@ -52,8 +52,10 @@ const Home = () => {
       <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl hidden lg:block">
         <img src={logo} alt="icon" className="w-full pb-5" />
         <div
-          className=" rounded-l-2xl hover:bg-blue-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {}}
+          className="bg-blue-700  text-white rounded-l-2xl hover:bg-blue-800 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
+          onClick={() => {
+            navigate(`/home?user_id=${searchParams.get("user_id")}`);
+          }}
         >
           <FaPlus />
           <label className="font-bold">Add Marks</label>

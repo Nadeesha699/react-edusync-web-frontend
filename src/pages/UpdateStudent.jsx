@@ -21,7 +21,7 @@ export default function UpdateStudent() {
   async function loadData() {
     const result = await axios.get(
       `http://127.0.0.1:5000/api/studentmarks/get-by-id/${atob(
-        searchParams.get("id")
+        searchParams.get("mark-id")
       )}`
     );
     setIndex(result.data[0].student_index);
@@ -35,7 +35,7 @@ export default function UpdateStudent() {
     axios
       .put(
         `http://127.0.0.1:5000/api/studentmarks/update-by-id/${atob(
-          searchParams.get("id")
+          searchParams.get("mark-id")
         )}`,
         {
           student_index: index,
