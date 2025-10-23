@@ -19,7 +19,7 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-row h-dvh bg-zinc-300">
-      <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl mr-5">
+      <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl hidden lg:block">
         <img src={logo} alt="icon" className="w-full pb-5" />
         <div
           className=" rounded-l-2xl hover:bg-blue-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
@@ -66,7 +66,7 @@ const Home = () => {
           <label className="font-bold">Logout</label>
         </div>
       </div>
-      <div className="w-5/6 bg-transparent ">
+      <div className="lg:w-5/6 w-full bg-transparent ">
         {routeNumber === 0 ? (
           <AddMarks />
         ) : routeNumber === 1 ? (

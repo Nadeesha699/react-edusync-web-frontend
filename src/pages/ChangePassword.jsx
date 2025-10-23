@@ -67,16 +67,16 @@ export default function ChangePassword() {
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BiArrowBack
         size={30}
-        className="fixed top-10 left-10"
+        className="fixed lg:top-10 lg:left-10 top-5 left-5"
         onClick={() => {
           navigate(-1);
         }}
       />
       <form
         onSubmit={changePassword}
-        className="bg-white w-1/3 rounded-lg p-5 flex flex-col gap-5"
+        className="bg-white lg:w-1/3 rounded-lg p-5 flex flex-col gap-5"
       >
-        <div className="w-full flex  flex-col gap-2 justify-center items-center">
+        <div className="w-full flex  flex-col gap-2 justify-center items-center text-center">
           <label className="font-bold text-gray-500 text-5xl">
             Change<span className="text-blue-700"> Password</span>{" "}
           </label>

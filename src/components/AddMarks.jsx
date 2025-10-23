@@ -1,14 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
-import { LuCalculator, LuIdCard, LuSend, LuUser } from "react-icons/lu";
-import { MdClear } from "react-icons/md";
+import { LuCalculator, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
+import { MdClear, MdPeople, MdLogout, MdCancel } from "react-icons/md";
 import { toast } from "react-toastify";
+import logo from "../images/logo.png";
+import { FaPlus } from "react-icons/fa6";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function AddMarks() {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [showMenu,setShowMenu] = useState(false)
 
   function saveMarks(e) {
     setLoading(true);
@@ -39,11 +45,14 @@ export default function AddMarks() {
       });
   }
   return (
-    <div className="w-full h-dvh pr-5 pt-5 pb-5">
+    <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5 ">
       <form
         onSubmit={saveMarks}
-        className="bg-white w-full rounded-lg p-5 flex flex-col gap-5"
+        className="bg-white rounded-lg p-5 flex flex-col gap-5"
       >
+        <LuMenu size={40} className="text-blue-700 block lg:hidden" onClick={()=>{
+          setShowMenu(true)
+        }}/>
         <label className="font-bold text-gray-500 text-5xl">
           Add<span className="text-blue-700"> Marks</span>{" "}
         </label>
@@ -92,7 +101,7 @@ export default function AddMarks() {
           <button
             disabled={loading}
             type="submit"
-            className="bg-blue-700  duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4 text-white font-bold"
+            className="bg-blue-700  duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 md:w-1/4 text-white font-bold"
           >
             {loading ? (
               <>
@@ -127,12 +136,53 @@ export default function AddMarks() {
           </button>
           <button
             type="reset"
-            className="ring-blue-700 ring-1 text-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4 font-bold"
+            className="ring-blue-700 ring-1 text-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 md:w-1/4 font-bold"
           >
-            <MdClear />clear
+            <MdClear />
+            clear
           </button>
         </div>
       </form>
+      <div className="bg-white top-0 bottom-0 left-0 right-0 fixed flex flex-col gap-5 justify-start items-center p-5">
+        <img src={logo} alt="icon" className="h-1/4 w-1/2" />
+        <div className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold">
+          <FaPlus />
+          Add Marks
+        </div>
+        <div className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold">
+          <MdPeople />
+          Students Marks
+        </div>
+        <div
+          className=" p-2 w-full flex flex-row justify-center items-center gap-2 duration-300 ease-in cursor-pointer bg-blue-700 text-white rounded-full hover:bg-blue-800 font-bold"
+          onClick={() => {
+            Swal.fire({
+              title: "EduSync ICT",
+              text: "Are you sure you want to logout ? ",
+              icon: "warning",
+              showCancelButton: true,
+              cancelButtonText: "Stay",
+              confirmButtonText: "Logout",
+              confirmButtonColor: "#1D4ED8",
+              cancelButtonColor: "#7590dcff",
+            }).then((e) => {
+              if (e.isConfirmed) {
+                navigate("/login");
+              }
+            });
+          }}
+        >
+          <MdLogout />
+          logout
+        </div>
+        <div
+          className=" p-2 w-full flex flex-row justify-center items-center gap-2 duration-300 ease-in cursor-pointer ring-blue-700 ring-1  text-blue-700 rounded-full font-bold"
+          onClick={() => {}}
+        >
+          <MdClear />
+          cancel
+        </div>
+      </div>
     </div>
   );
 }

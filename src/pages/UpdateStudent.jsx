@@ -61,16 +61,16 @@ export default function UpdateStudent() {
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BiArrowBack
         size={30}
-        className="fixed top-10 left-10"
+        className="fixed lg:top-10 lg:left-10 top-5 left-5"
         onClick={() => {
           navigate(-1);
         }}
       />
       <form
         onSubmit={updateMarks}
-        className="bg-white w-1/2 rounded-lg p-5 flex flex-col gap-5"
+        className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"
       >
-        <label className="font-bold text-gray-500 text-5xl">
+        <label className="font-bold text-gray-500 text-5xl text-center">
           Update<span className="text-blue-700"> Student</span>{" "}
         </label>
         <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
@@ -114,7 +114,7 @@ export default function UpdateStudent() {
         <div className="flex flex-row gap-5 justify-start">
           <button
             type="submit"
-            className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4 text-white font-bold"
+            className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 lg:w-1/4 text-white font-bold"
           >
             {loading ? (
               <>
@@ -152,7 +152,7 @@ export default function UpdateStudent() {
             onClick={() => {
               navigate(-1);
             }}
-            className="ring-blue-700 ring-1 text-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/4 font-bold"
+            className="ring-blue-700 ring-1 text-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 lg:w-1/4 font-bold"
           >
             <MdClear />cancel
           </button>

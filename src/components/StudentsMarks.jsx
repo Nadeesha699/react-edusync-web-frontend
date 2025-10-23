@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { BiExport, BiTrash } from "react-icons/bi";
-import { LuFileX, LuSearch } from "react-icons/lu";
+import { BiExport, BiMenu, BiTrash } from "react-icons/bi";
+import { LuFileX, LuMenu, LuSearch } from "react-icons/lu";
 import { MdUpdate } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -30,8 +30,9 @@ export default function StudentsMarks() {
   }
 
   return (
-    <div className="w-full h-dvh pr-5 pt-5 pb-5">
+    <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
       <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
+        <LuMenu size={40} className="text-blue-700 block lg:hidden"/>  
         <div className="flex flex-row justify-between items-center">
           <label className="font-bold text-5xl text-gray-500">
             Student<span className="text-blue-700"> Marks</span>
