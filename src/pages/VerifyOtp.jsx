@@ -4,6 +4,7 @@ import { LuBadgeCheck } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { BackButton } from "../components/Components";
 
 export default function VerifyOtp() {
   const navigate = useNavigate();
@@ -54,7 +55,6 @@ export default function VerifyOtp() {
         const otpData = {
           value: e1.data.otp,
           expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-          // expiry: Date.now() + 10 * 1000,
         };
         sessionStorage.setItem("otp", JSON.stringify(otpData));
         window.location.reload();
@@ -66,13 +66,7 @@ export default function VerifyOtp() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BiArrowBack
-        size={30}
-        className="fixed lg:top-10 lg:left-10 top-5 left-5"
-        onClick={() => {
-          navigate(-1);
-        }}
-      />
+    <BackButton/>
       <form
         onSubmit={verifyOtp}
         className="bg-white  lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"

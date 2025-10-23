@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { MdClear } from "react-icons/md";
+import { BackButton } from "../components/Components";
 
 export default function FindResult() {
   const navigate = useNavigate();
@@ -65,13 +66,7 @@ export default function FindResult() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BiArrowBack
-        size={30}
-        className="fixed lg:top-10 lg:left-10 top-5 left-5"
-        onClick={() => {
-          navigate(-1);
-        }}
-      />
+      <BackButton/>
       <div className="flex flex-col gap-5 lg:w-1/3 sm:w-1/2">
         <form
           onSubmit={findResult}

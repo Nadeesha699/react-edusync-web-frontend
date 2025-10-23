@@ -5,6 +5,7 @@ import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { BackButton } from "../components/Components";
 
 export default function UpdateStudent() {
   const navigate = useNavigate();
@@ -59,13 +60,7 @@ export default function UpdateStudent() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BiArrowBack
-        size={30}
-        className="fixed lg:top-10 lg:left-10 top-5 left-5"
-        onClick={() => {
-          navigate(-1);
-        }}
-      />
+      <BackButton/>
       <form
         onSubmit={updateMarks}
         className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"

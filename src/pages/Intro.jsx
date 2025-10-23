@@ -33,7 +33,7 @@ export default function Intro() {
         </div>
         <div className="w-full text-center"> <label className="text-gray-400"> © 2025 EduSync ICT | Developed by <a href="https://nadeesha699.github.io/nadeesha-ruwandima/" className="text-blue-700 font-bold ease-in hover:text-blue-800">Nadeesha Ruwandima</a></label></div>
       </div>
-      <img src={IntroImage} alt="icon" className="w-1/2 h-full flex hidden lg:block h-auto"/>
+      <img src={IntroImage} alt="icon" className="w-1/2 h-full flex hidden lg:block"/>
 
     </div>
   );
