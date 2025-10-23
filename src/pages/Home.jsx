@@ -7,6 +7,7 @@ import axios from "axios";
 import { LuCalculator, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
 import { MdClear, MdPeople, MdLogout } from "react-icons/md";
 import { toast } from "react-toastify";
+import { LoadingUi } from "../components/Components";
 
 const Home = () => {
   const [searchParams] = useSearchParams();
@@ -99,7 +100,7 @@ const Home = () => {
             className="bg-white rounded-lg p-5 flex flex-col gap-5"
           >
             <LuMenu
-              size={40}
+              size={30}
               className="text-blue-700 block lg:hidden"
               onClick={() => {
                 setShowMenu(true);
@@ -157,26 +158,7 @@ const Home = () => {
               >
                 {loading ? (
                   <>
-                    <svg
-                      className="mr-3 w-5 h-5 animate-spin text-white"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                      ></path>
-                    </svg>
+                    <LoadingUi/>
                     submiting…
                   </>
                 ) : (

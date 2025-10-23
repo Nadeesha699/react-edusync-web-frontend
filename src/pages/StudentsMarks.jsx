@@ -83,7 +83,7 @@ export default function StudentsMarks() {
         <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
           <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
             <LuMenu
-              size={50}
+              size={30}
               className="text-blue-700 block lg:hidden"
               onClick={() => {
                 setShowMenu(true);
