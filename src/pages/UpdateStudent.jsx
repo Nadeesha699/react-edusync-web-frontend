@@ -5,7 +5,7 @@ import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BackButton } from "../components/Components";
+import { BackButton, LoadingUi } from "../components/Components";
 
 export default function UpdateStudent() {
   const navigate = useNavigate();
@@ -113,26 +113,7 @@ export default function UpdateStudent() {
           >
             {loading ? (
               <>
-                <svg
-                  className="mr-3 w-5 h-5 animate-spin text-white"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                  ></path>
-                </svg>
+               <LoadingUi/>
                 updating…
               </>
             ) : (
