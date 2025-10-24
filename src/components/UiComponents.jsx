@@ -143,3 +143,69 @@ export const DataNotFound = () => {
     </div>
   );
 };
+
+export const StudentMobileCard = ({ student_index, student_name, marks }) => {
+  return (
+    <div className="flex flex-row justify-between items-start gap-2">
+      <div className="flex flex-col justify-start gap-2">
+        <label className="text-center truncate flex flex-row gap-2 font-bold">
+          <span className="text-blue-700">Student Index:</span>
+          {student_index}
+        </label>
+        <label className="text-center truncate flex flex-row gap-2 font-bold">
+          <span className="text-blue-700">Student Name:</span> {student_name}
+        </label>
+        <label className=" text-center truncate flex flex-row gap-2 font-bold">
+          <span className="text-blue-700">Student Marks:</span> {marks}
+        </label>
+      </div>
+      {marks >= 75 ? (
+        <label className="text-emerald-600 text-2xl font-bold">A</label>
+      ) : marks >= 65 ? (
+        <label className="text-blue-500 text-2xl font-bold">B</label>
+      ) : marks >= 50 ? (
+        <label className="text-amber-500 text-2xl font-bold">C</label>
+      ) : marks >= 35 ? (
+        <label className="text-violet-500 text-2xl font-bold">S</label>
+      ) : (
+        <label className="text-rose-600 text-2xl font-bold">F</label>
+      )}
+    </div>
+  );
+};
+
+export const StudentWebCard = ({ student_index, student_name, marks }) => {
+  return (
+    <>
+      <label className="md:w-1/6 text-center truncate p-2">
+        {student_index}
+      </label>
+      <label className="md:w-1/6 text-center truncate p-2">
+        {student_name}
+      </label>
+      <label className="md:w-1/6 text-center truncate p-2">{marks}</label>
+
+      {marks >= 75 ? (
+        <label className="md:w-1/6 text-center truncate p-2 text-emerald-600 font-bold">
+          A
+        </label>
+      ) : marks >= 65 ? (
+        <label className="md:w-1/6 text-center truncate p-2 text-blue-500 font-bold">
+          B
+        </label>
+      ) : marks >= 50 ? (
+        <label className="md:w-1/6 text-center truncate p-2 text-amber-500 font-bold">
+          C
+        </label>
+      ) : marks >= 35 ? (
+        <label className="md:w-1/6 text-center truncate p-2 text-violet-500 font-bold">
+          S
+        </label>
+      ) : (
+        <label className="md:w-1/6 text-center truncate p-2 text-rose-600 font-bold">
+          F
+        </label>
+      )}
+    </>
+  );
+};

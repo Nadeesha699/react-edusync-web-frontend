@@ -1,13 +1,13 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
-import { LuFileX, LuMenu, LuSearch } from "react-icons/lu";
-import { MdClear, MdUpdate ,MdPeople,MdLogout} from "react-icons/md";
+import { LuMenu, LuSearch } from "react-icons/lu";
+import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
 import axios from "axios";
 import StudentMarksJson from "../json/studentmarks.json";
-import { DataNotFound } from "./UiComponents";
+import { DataNotFound, StudentMobileCard, StudentWebCard } from "./UiComponents";
 import Swal from "sweetalert2";
-import logo from "../images/logo.png"
+import logo from "../images/logo.png";
 import { FaPlus } from "react-icons/fa";
 import { appUrl } from "../utils/utils";
 
@@ -16,16 +16,14 @@ const StudentMarksDetails = () => {
   const [marksData, setMarksData] = useState([StudentMarksJson]);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     loadData();
   }, []);
 
   async function loadData() {
-    const result = await axios.get(
-      `${appUrl}/studentmarks/get-all`
-    );
+    const result = await axios.get(`${appUrl}/studentmarks/get-all`);
     setMarksData(result.data);
   }
 
@@ -80,43 +78,11 @@ const StudentMarksDetails = () => {
                     key={index}
                     className="w-full flex flex-col p-5 gap-2 justify-start border-2 rounded-lg border-blue-700 text-slate-700 text-sm  hover:bg-slate-50 transition"
                   >
-                    <div className="flex flex-row justify-between items-start gap-2">
-                      <div className="flex flex-col justify-start gap-2">
-                        <label className="text-center truncate flex flex-row gap-2 font-bold">
-                          <span className="text-blue-700">Student Index:</span>
-                          {e.student_index}
-                        </label>
-                        <label className="text-center truncate flex flex-row gap-2 font-bold">
-                          <span className="text-blue-700">Student Name:</span>{" "}
-                          {e.student_name}
-                        </label>
-                        <label className=" text-center truncate flex flex-row gap-2 font-bold">
-                          <span className="text-blue-700">Student Marks:</span>{" "}
-                          {e.marks}
-                        </label>
-                      </div>
-                      {e.marks >= 75 ? (
-                        <label className="text-emerald-600 text-2xl font-bold">
-                          A
-                        </label>
-                      ) : e.marks >= 65 ? (
-                        <label className="text-blue-500 text-2xl font-bold">
-                          B
-                        </label>
-                      ) : e.marks >= 50 ? (
-                        <label className="text-amber-500 text-2xl font-bold">
-                          C
-                        </label>
-                      ) : e.marks >= 35 ? (
-                        <label className="text-violet-500 text-2xl font-bold">
-                          S
-                        </label>
-                      ) : (
-                        <label className="text-rose-600 text-2xl font-bold">
-                          F
-                        </label>
-                      )}
-                    </div>
+                    <StudentMobileCard
+                      student_index={e.student_index}
+                      student_name={e.student_name}
+                      marks={e.marks}
+                    />
                     <div className="flex flex-row justify-center gap-5 w-full">
                       <div className="p-2 flex flex-row justify-center gap-2 rounded-lg border border-1 border-green-500 text-green-500 font-bold items-center w-1/2">
                         <MdUpdate
@@ -163,10 +129,7 @@ const StudentMarksDetails = () => {
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide hidden md:block">
           {marksData.length === 0 ? (
-            <div className="w-full h-full flex flex-col justify-center items-center gap-2 text-gray-300">
-              <LuFileX size={40} />
-              <label className="font-bold">No data found</label>
-            </div>
+            <DataNotFound />
           ) : (
             <>
               <div className="w-full flex flex-row justify-between border-b-2 border-slate-700 text-blue-700 text-sm">
@@ -200,38 +163,7 @@ const StudentMarksDetails = () => {
                     key={index}
                     className="w-full flex flex-row justify-between border-b-2 border-slate-700 text-slate-700 text-sm  hover:bg-slate-50 transition"
                   >
-                    <label className="md:w-1/6 text-center truncate p-2">
-                      {e.student_index}
-                    </label>
-                    <label className="md:w-1/6 text-center truncate p-2">
-                      {e.student_name}
-                    </label>
-                    <label className="md:w-1/6 text-center truncate p-2">
-                      {e.marks}
-                    </label>
-
-                    {e.marks >= 75 ? (
-                      <label className="md:w-1/6 text-center truncate p-2 text-emerald-600 font-bold">
-                        A
-                      </label>
-                    ) : e.marks >= 65 ? (
-                      <label className="md:w-1/6 text-center truncate p-2 text-blue-500 font-bold">
-                        B
-                      </label>
-                    ) : e.marks >= 50 ? (
-                      <label className="md:w-1/6 text-center truncate p-2 text-amber-500 font-bold">
-                        C
-                      </label>
-                    ) : e.marks >= 35 ? (
-                      <label className="md:w-1/6 text-center truncate p-2 text-violet-500 font-bold">
-                        S
-                      </label>
-                    ) : (
-                      <label className="md:w-1/6 text-center truncate p-2 text-rose-600 font-bold">
-                        F
-                      </label>
-                    )}
-
+                   <StudentWebCard/>
                     <div className="md:w-1/6 p-2 flex flex-row justify-center gap-5">
                       <MdUpdate
                         className="text-green-500 hover:text-black duration-300 ease-in-out cursor-pointer"
