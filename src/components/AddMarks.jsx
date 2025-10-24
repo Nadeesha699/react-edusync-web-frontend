@@ -1,9 +1,13 @@
-import { MdClear } from "react-icons/md";
-import { LoadingUi } from "../components/Components";
+import { MdClear,MdPeople, MdLogout } from "react-icons/md";
+import { LoadingUi } from "../components/UiComponents";
 import { LuCalculator, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { FaPlus } from "react-icons/fa6";
+import logo from "../images/logo.png";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -11,6 +15,8 @@ const AddMarks = () => {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams()
 
   function saveMarks(e) {
     setLoading(true);

@@ -1,17 +1,22 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
 import { LuFileX, LuMenu, LuSearch } from "react-icons/lu";
-import { MdClear, MdUpdate } from "react-icons/md";
+import { MdClear, MdUpdate ,MdPeople,MdLogout} from "react-icons/md";
 import axios from "axios";
 import StudentMarksJson from "../json/studentmarks.json";
 import { DataNotFound } from "./UiComponents";
+import Swal from "sweetalert2";
+import logo from "../images/logo.png"
+import { FaPlus } from "react-icons/fa";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [marksData, setMarksData] = useState([StudentMarksJson]);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams()
+
   useEffect(() => {
     loadData();
   }, []);

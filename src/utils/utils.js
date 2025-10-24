@@ -1,4 +1,4 @@
-export function foramtDate(dateStr) {
+export function formatDate(dateStr) {
   const date = new Date(dateStr);
 
   const formattedDate = date.toLocaleString("en-US", {

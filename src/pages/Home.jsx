@@ -3,13 +3,12 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import { MdPeople, MdLogout } from "react-icons/md";
-
 import AddMarks from "../components/AddMarks";
 
 const Home = () => {
-  const [searchParams] = useSearchParams();
-
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate();
+
   return (
     <div className="flex flex-row h-dvh bg-zinc-300">
       <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl hidden lg:block">

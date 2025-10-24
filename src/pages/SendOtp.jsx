@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { BiArrowBack } from "react-icons/bi";
 import { LuMail, LuSend } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi } from "../components/Components";
+import { BackButton, LoadingUi } from "../components/UiComponents";
 
 export default function SendOtp() {
   const navigate = useNavigate();

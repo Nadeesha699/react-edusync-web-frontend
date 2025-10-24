@@ -16,6 +16,19 @@ export const BackButton = () => {
   );
 };
 
+export const LoginBackButton = () => {
+  const navigate = useNavigate();
+  return (
+    <BiArrowBack
+      size={30}
+      className="fixed lg:top-10 lg:left-10 top-5 left-5"
+      onClick={() => {
+        navigate("/");
+      }}
+    />
+  );
+};
+
 export const LoadingUi = () => {
   return (
     <svg

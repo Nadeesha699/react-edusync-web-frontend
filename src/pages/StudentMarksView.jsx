@@ -5,7 +5,7 @@ import logo from "../images/logo.png";
 import { MdPeople, MdLogout } from "react-icons/md";
 import StudentMarksDetails from "../components/StudentMarksDetails";
 
-export default function StudentsMarks() {
+export default function StudentsMarksView() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 

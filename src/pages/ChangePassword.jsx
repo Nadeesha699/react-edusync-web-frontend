@@ -1,11 +1,10 @@
-import { BiArrowBack } from "react-icons/bi";
 import { MdUpdate } from "react-icons/md";
 import { LuEye, LuEyeOff, LuLock } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi } from "../components/Components";
+import { BackButton, LoadingUi } from "../components/UiComponents";
 
 export default function ChangePassword() {
   const navigate = useNavigate();

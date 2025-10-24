@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { BiArrowBack } from "react-icons/bi";
 import { LuBadgeCheck } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { BackButton, LoadingUi } from "../components/Components";
+import { BackButton, LoadingUi } from "../components/UiComponents";
 
 export default function VerifyOtp() {
   const navigate = useNavigate();

@@ -1,21 +1,16 @@
-import { BiArrowBack } from "react-icons/bi";
-import { LuFileX, LuIdCard, LuSearch } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
+import { LuIdCard, LuSearch } from "react-icons/lu";
 import axios from "axios";
 import { useState } from "react";
-import { MdClear } from "react-icons/md";
 import {
   BackButton,
   LoadingUi,
-  NoResultFound,
   ResultCard,
   ResultNotFound,
   ServerNotConnect,
-} from "../components/Components";
-import { foramtDate } from "../utils/utils";
+} from "../components/UiComponents";
+import { formatDate } from "../utils/utils";
 
 export default function FindResult() {
-  const navigate = useNavigate();
   const [index, setIndex] = useState("");
   const [indexs, setIndexs] = useState("");
   const [name, setName] = useState("");
@@ -37,7 +32,7 @@ export default function FindResult() {
           setShowResult(false);
           setNoResult(true);
         } else {
-          setIssuedDate(foramtDate(e.data.updated_at));
+          setIssuedDate(formatDate(e.data.updated_at));
           setName(e.data.student_name);
           setMarks(e.data.marks);
           setIndexs(e.data.student_index);

@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
-import { BiArrowBack } from "react-icons/bi";
 import { LuCalculator, LuIdCard, LuUser } from "react-icons/lu";
 import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi } from "../components/Components";
+import { BackButton, LoadingUi } from "../components/UiComponents";
 
-export default function UpdateStudent() {
+export default function StudentUpdate() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [index, setIndex] = useState("");
