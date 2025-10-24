@@ -12,3 +12,5 @@ export function formatDate(dateStr) {
   });
   return formattedDate;
 }
+
+export const appUrl =  "http://127.0.0.1:5000/api"

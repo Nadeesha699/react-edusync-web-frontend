@@ -9,6 +9,7 @@ import { DataNotFound } from "./UiComponents";
 import Swal from "sweetalert2";
 import logo from "../images/logo.png"
 import { FaPlus } from "react-icons/fa";
+import { appUrl } from "../utils/utils";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -23,7 +24,7 @@ const StudentMarksDetails = () => {
 
   async function loadData() {
     const result = await axios.get(
-      `http://127.0.0.1:5000/api/studentmarks/get-all`
+      `${appUrl}/studentmarks/get-all`
     );
     setMarksData(result.data);
   }
@@ -145,7 +146,7 @@ const StudentMarksDetails = () => {
                             }).then(async (e1) => {
                               if (e1.isConfirmed) {
                                 await axios.delete(
-                                  `http://127.0.0.1:5000/api/studentmarks/delete-by-id/${e.id}`
+                                  `${appUrl}/studentmarks/delete-by-id/${e.id}`
                                 );
                                 loadData();
                               }
@@ -258,7 +259,7 @@ const StudentMarksDetails = () => {
                           }).then(async (e1) => {
                             if (e1.isConfirmed) {
                               await axios.delete(
-                                `http://127.0.0.1:5000/api/studentmarks/delete-by-id/${e.id}`
+                                `${appUrl}/studentmarks/delete-by-id/${e.id}`
                               );
                               loadData();
                             }

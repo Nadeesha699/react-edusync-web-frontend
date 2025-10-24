@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import logo from "../images/logo.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { appUrl } from "../utils/utils";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const AddMarks = () => {
     setLoading(true);
     e.preventDefault();
     axios
-      .post(`http://127.0.0.1:5000/api/studentmarks/save`, {
+      .post(`${appUrl}/studentmarks/save`, {
         student_index: index,
         student_name: name,
         marks: marks,

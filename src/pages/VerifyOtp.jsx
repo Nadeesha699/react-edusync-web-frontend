@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { BackButton, LoadingUi } from "../components/UiComponents";
+import { appUrl } from "../utils/utils";
 
 export default function VerifyOtp() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function VerifyOtp() {
 
   const resendOtp = () => {
     axios
-      .post(`http://127.0.0.1:5000/api/email/send_otp`, {
+      .post(`${appUrl}/email/send_otp`, {
         receiver_email: atob(searchParams.get("email")),
       })
       .then((e1) => {

@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
+import { appUrl } from "../utils/utils";
 
 export default function StudentUpdate() {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function StudentUpdate() {
 
   async function loadData() {
     const result = await axios.get(
-      `http://127.0.0.1:5000/api/studentmarks/get-by-id/${atob(
+      `${appUrl}/studentmarks/get-by-id/${atob(
         searchParams.get("mark-id")
       )}`
     );
@@ -34,7 +35,7 @@ export default function StudentUpdate() {
     e.preventDefault();
     axios
       .put(
-        `http://127.0.0.1:5000/api/studentmarks/update-by-id/${atob(
+        `${appUrl}/studentmarks/update-by-id/${atob(
           searchParams.get("mark-id")
         )}`,
         {

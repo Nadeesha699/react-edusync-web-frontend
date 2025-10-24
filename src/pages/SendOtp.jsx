@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
+import { appUrl } from "../utils/utils";
 
 export default function SendOtp() {
   const navigate = useNavigate();
@@ -15,13 +16,13 @@ export default function SendOtp() {
     e.preventDefault();
 
     axios
-      .post(`http://127.0.0.1:5000/api/teachers/verify-email/${email}`, {
+      .post(`${appUrl}/teachers/verify-email/${email}`, {
         email: email,
       })
       .then((e) => {
         if (e.data) {
           axios
-            .post(`http://127.0.0.1:5000/api/email/send_otp`, {
+            .post(`${appUrl}/email/send_otp`, {
               receiver_email: email,
             })
             .then((e1) => {

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
+import { appUrl } from "../utils/utils";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function ChangePassword() {
 
   const loadData = async () => {
     const result = await axios.get(
-      `http://127.0.0.1:5000/api/teachers/get-by-id/${atob(
+      `${appUrl}/teachers/get-by-id/${atob(
         searchParams.get("id")
       )}`
     );
@@ -39,7 +40,7 @@ export default function ChangePassword() {
 
     axios
       .put(
-        `http://127.0.0.1:5000/api/teachers/update-by-id/${atob(
+        `${appUrl}/teachers/update-by-id/${atob(
           searchParams.get("id")
         )}`,
         {

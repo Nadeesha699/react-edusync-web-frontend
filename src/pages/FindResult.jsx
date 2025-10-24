@@ -8,7 +8,7 @@ import {
   ResultNotFound,
   ServerNotConnect,
 } from "../components/UiComponents";
-import { formatDate } from "../utils/utils";
+import { appUrl, formatDate } from "../utils/utils";
 
 export default function FindResult() {
   const [index, setIndex] = useState("");
@@ -25,7 +25,7 @@ export default function FindResult() {
     setLoading(true);
     e.preventDefault();
     axios
-      .get(`http://127.0.0.1:5000/api/studentmarks/get-by-index/${index}`)
+      .get(`${appUrl}/studentmarks/get-by-index/${index}`)
       .then((e) => {
         setNotConnect(false);
         if (e.data === null) {

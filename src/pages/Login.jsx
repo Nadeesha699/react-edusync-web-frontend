@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi, LoginBackButton } from "../components/UiComponents";;
+import {
+  LoadingUi,
+  LoginBackButton,
+} from "../components/UiComponents";
+import { appUrl } from "../utils/utils";
 
 export default function Login() {
   const [eyehide, setEyeHide] = useState(false);
@@ -16,16 +20,14 @@ export default function Login() {
   const login = (e) => {
     setLoading(true);
     e.preventDefault();
-    const apiUrl = process.env.REACT_APP_API_URL;
-console.log("API URL:", apiUrl);
 
     axios
-      .post(`http://127.0.0.1:5000/api/teachers/login`, {
+      .post(`${appUrl}/teachers/login`, {
         email: email,
         password: password,
       })
       .then((e1) => {
-        toast.success("Login successful! Welcome back 👋"+process.env.TEST);
+        toast.success("Login successful! Welcome back 👋");
         navigate(`/home?user_id=${btoa(e1.data.user_id)}`);
       })
       .catch((e) => {
@@ -46,7 +48,7 @@ console.log("API URL:", apiUrl);
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <LoginBackButton/>
+      <LoginBackButton />
       <form
         onSubmit={login}
         className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
