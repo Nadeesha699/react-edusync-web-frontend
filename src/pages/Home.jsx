@@ -2,8 +2,7 @@ import logo from "../images/logo.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
-import {  MdPeople, MdLogout } from "react-icons/md";
-
+import { MdPeople, MdLogout } from "react-icons/md";
 
 import AddMarks from "../components/AddMarks";
 
@@ -57,7 +56,7 @@ const Home = () => {
         </div>
       </div>
       <div className="lg:w-5/6 w-full bg-transparent ">
-       <AddMarks/>
+        <AddMarks />
       </div>
     </div>
   );

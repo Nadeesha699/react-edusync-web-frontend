@@ -1,11 +1,9 @@
-
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import logo from "../images/logo.png";
-import {  MdPeople, MdLogout } from "react-icons/md";
+import { MdPeople, MdLogout } from "react-icons/md";
 import StudentMarksDetails from "../components/StudentMarksDetails";
-
 
 export default function StudentsMarks() {
   const navigate = useNavigate();
@@ -57,7 +55,7 @@ export default function StudentsMarks() {
         </div>
       </div>
       <div className="lg:w-5/6 w-full bg-transparent ">
-      <StudentMarksDetails/>
+        <StudentMarksDetails />
       </div>
     </div>
   );

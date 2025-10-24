@@ -28,11 +28,14 @@ export default function Login() {
       })
       .catch((e) => {
         if (e.status === 401) {
-          toast.error("Incorrect credentials. Please check your details and try again.");
+          toast.error(
+            "Incorrect credentials. Please check your details and try again."
+          );
         } else if (e.status === 500) {
           toast.error("Server connection issue. Please try again in a moment.");
         }
-      }).finally(() => {
+      })
+      .finally(() => {
         setTimeout(() => {
           setLoading(false);
         }, 500);
@@ -41,7 +44,7 @@ export default function Login() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BackButton/>
+      <BackButton />
       <form
         onSubmit={login}
         className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
@@ -101,7 +104,7 @@ export default function Login() {
           >
             {loading ? (
               <>
-             <LoadingUi/>
+                <LoadingUi />
                 signing…
               </>
             ) : (

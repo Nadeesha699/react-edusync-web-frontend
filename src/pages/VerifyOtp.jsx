@@ -66,7 +66,7 @@ export default function VerifyOtp() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-    <BackButton/>
+      <BackButton />
       <form
         onSubmit={verifyOtp}
         className="bg-white  lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
@@ -161,7 +161,7 @@ export default function VerifyOtp() {
           >
             {loading ? (
               <>
-                <LoadingUi/>
+                <LoadingUi />
                 verifying…
               </>
             ) : (

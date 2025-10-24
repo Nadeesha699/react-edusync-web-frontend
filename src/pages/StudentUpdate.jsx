@@ -60,7 +60,7 @@ export default function UpdateStudent() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BackButton/>
+      <BackButton />
       <form
         onSubmit={updateMarks}
         className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"
@@ -113,7 +113,7 @@ export default function UpdateStudent() {
           >
             {loading ? (
               <>
-               <LoadingUi/>
+                <LoadingUi />
                 updating…
               </>
             ) : (
@@ -124,13 +124,14 @@ export default function UpdateStudent() {
             )}
           </button>
           <button
-          type="button"
+            type="button"
             onClick={() => {
               navigate(-1);
             }}
             className="ring-blue-700 ring-1 text-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 lg:w-1/4 font-bold"
           >
-            <MdClear />cancel
+            <MdClear />
+            cancel
           </button>
         </div>
       </form>

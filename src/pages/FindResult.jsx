@@ -4,7 +4,14 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { MdClear } from "react-icons/md";
-import { BackButton, LoadingUi, NoResultFound, ResultCard, ResultNotFound, ServerNotConnect } from "../components/Components";
+import {
+  BackButton,
+  LoadingUi,
+  NoResultFound,
+  ResultCard,
+  ResultNotFound,
+  ServerNotConnect,
+} from "../components/Components";
 import { foramtDate } from "../utils/utils";
 
 export default function FindResult() {
@@ -50,10 +57,9 @@ export default function FindResult() {
       });
   };
 
-
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BackButton/>
+      <BackButton />
       <div className="flex flex-col gap-5 lg:w-1/3 sm:w-1/2">
         <form
           onSubmit={findResult}
@@ -87,7 +93,7 @@ export default function FindResult() {
             >
               {loading ? (
                 <>
-                 <LoadingUi/>
+                  <LoadingUi />
                   Searching…
                 </>
               ) : (
@@ -100,20 +106,17 @@ export default function FindResult() {
           </div>
         </form>
         {showResult === true ? (
-         <ResultCard marks={marks} indexs={indexs} name={name} issuedDate={issuedDate}/>
+          <ResultCard
+            marks={marks}
+            indexs={indexs}
+            name={name}
+            issuedDate={issuedDate}
+          />
         ) : (
           ""
         )}
-        {noResult ? (
-          <ResultNotFound/>
-        ) : (
-          ""
-        )}
-        {notConnect ? (
-          <ServerNotConnect/>
-        ) : (
-          ""
-        )}
+        {noResult ? <ResultNotFound /> : ""}
+        {notConnect ? <ServerNotConnect /> : ""}
       </div>
     </div>
   );

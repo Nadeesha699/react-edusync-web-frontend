@@ -66,7 +66,7 @@ export default function ChangePassword() {
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
-      <BackButton/>
+      <BackButton />
       <form
         onSubmit={changePassword}
         className="bg-white lg:w-1/3 rounded-lg p-5 flex flex-col gap-5"
@@ -138,7 +138,7 @@ export default function ChangePassword() {
           >
             {loading ? (
               <>
-               <LoadingUi/>
+                <LoadingUi />
                 updating…
               </>
             ) : (
