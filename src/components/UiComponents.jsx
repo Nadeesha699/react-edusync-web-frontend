@@ -117,3 +117,15 @@ export const ResultCard = ({marks,indexs,name,issuedDate}) =>{
           </div>
     )
 }
+
+export const DataNotFound = ()=>{
+  return(
+                  <div className="w-full h-full flex flex-col justify-center items-center gap-2 text-gray-300">
+                  <LuFileX size={40} />
+                  <label className="font-bold text-lg">No data available</label>
+  <p className="text-sm text-center">
+    We couldn’t find any records to display. Please check back later or try refreshing the page.
+  </p>
+                </div>
+  )
+}

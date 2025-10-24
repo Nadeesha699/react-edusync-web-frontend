@@ -1,29 +1,21 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
 import { LuFileX, LuMenu, LuSearch } from "react-icons/lu";
-import { MdUpdate } from "react-icons/md";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { MdClear, MdUpdate } from "react-icons/md";
 import axios from "axios";
-import Swal from "sweetalert2";
-import { FaPlus } from "react-icons/fa6";
-import logo from "../images/logo.png";
-import { MdClear, MdPeople, MdLogout } from "react-icons/md";
+import StudentMarksJson from "../json/studentmarks.json"
+import { DataNotFound } from "./UiComponents";
 
-export default function StudentsMarks() {
-  const navigate = useNavigate();
-  const [searchTxt, setSearchTxt] = useState("");
+const StudentMarksDetails = ()=>{
+
+      const [searchTxt, setSearchTxt] = useState("");
   const [marksData, setMarksData] = useState([
-    {
-      id: 0,
-      marks: 0,
-      student_name: "",
-      student_index: "",
-    },
+   StudentMarksJson 
   ]);
   const [showMenu, setShowMenu] = useState(false);
-  const [searchParams] = useSearchParams();
-
-  useEffect(() => {
+  const navigate = useNavigate();
+      useEffect(() => {
     loadData();
   }, []);
 
@@ -34,53 +26,8 @@ export default function StudentsMarks() {
     setMarksData(result.data);
   }
 
-  return (
-    <div className="flex flex-row h-dvh bg-zinc-300">
-      <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl hidden lg:block">
-        <img src={logo} alt="icon" className="w-full pb-5" />
-        <div
-          className=" rounded-l-2xl hover:bg-blue-100 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {
-            navigate(`/home?user_id=${searchParams.get("user_id")}`);
-          }}
-        >
-          <FaPlus />
-          <label className="font-bold">Add Marks</label>
-        </div>
-        <div
-          className="bg-blue-700 text-white rounded-l-2xl hover:bg-blue-800 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {
-            navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
-          }}
-        >
-          <MdPeople />
-          <label className="font-bold">Students Marks</label>
-        </div>
-        <div
-          className="rounded-l-xl hover:bg-blue-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
-          onClick={() => {
-            Swal.fire({
-              title: "EduSync ICT",
-              text: "Are you sure you want to logout ? ",
-              icon: "warning",
-              showCancelButton: true,
-              cancelButtonText: "Stay",
-              confirmButtonText: "Logout",
-              confirmButtonColor: "#1D4ED8",
-              cancelButtonColor: "#7590dcff",
-            }).then((e) => {
-              if (e.isConfirmed) {
-                navigate("/login");
-              }
-            });
-          }}
-        >
-          <MdLogout />
-          <label className="font-bold">Logout</label>
-        </div>
-      </div>
-      <div className="lg:w-5/6 w-full bg-transparent ">
-        <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
+    return(
+          <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
           <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
             <LuMenu
               size={30}
@@ -113,10 +60,7 @@ export default function StudentsMarks() {
             </div>
             <div className="w-full h-full overflow-auto scrollbar-hide md:hidden block">
               {marksData.length === 0 ? (
-                <div className="w-full h-full flex flex-col justify-center items-center gap-2 text-gray-300">
-                  <LuFileX size={40} />
-                  <label className="font-bold">No data found</label>
-                </div>
+  <DataNotFound/>
               ) : (
                 <div className="flex flex-col gap-5">
                   {marksData
@@ -393,7 +337,7 @@ export default function StudentsMarks() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }
+
+export default StudentMarksDetails
