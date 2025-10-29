@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { LuCalculator, LuIdCard, LuUser } from "react-icons/lu";
 import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
-import { appUrl } from "../utils/utils";
 import { getById, updateById } from "../Service/StudentMarksService";
 
 export default function StudentUpdate() {
@@ -21,9 +19,8 @@ export default function StudentUpdate() {
   }, []);
 
   async function handleGetById() {
-    const result = await getById({atob(
-        searchParams.get("mark-id")
-      )})
+    const id = atob(searchParams.get("mark-id"))
+    const result = await getById({id})
     setIndex(result.student_index);
     setName(result.student_name);
     setMarks(result.marks);
@@ -31,35 +28,20 @@ export default function StudentUpdate() {
 
   function updateMarks(e) {
     setLoading(true);
+    const id = atob(searchParams.get("mark-id"))
     e.preventDefault();
 
     try {
-      updateById({,index,name,marks})
+      updateById({id,index,name,marks})
     } catch (error) {
-      
-    }
-
-    
-      .put(
-        `${appUrl}/studentmarks/update-by-id/${atob(searchParams.get("mark-id"))}`,
-        {
-          student_index: index,
-          student_name: name,
-          marks: marks,
-        }
-      )
-      .then(() => {
-        toast.success("Mark updated successfully!");
-      })
-      .catch((e) => {
-        toast.error("Server connection issue. Please try again in a moment.");
-      })
-      .finally(() => {
-        setTimeout(() => {
+      toast.error("Server connection issue. Please try again in a moment.");
+    }finally{
+      setTimeout(() => {
           setLoading(false);
           handleGetById()
         }, 500);
-      });
+    }
+
   }
 
   return (

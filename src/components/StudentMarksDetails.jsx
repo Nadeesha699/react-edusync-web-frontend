@@ -3,17 +3,16 @@ import { useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
 import { LuMenu, LuSearch } from "react-icons/lu";
 import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
-import axios from "axios";
 import StudentMarksJson from "../json/studentmarks.json";
 import {
   DataNotFound,
+  ServerNotConnect,
   StudentMobileCard,
   StudentWebCard,
 } from "./UiComponents";
 import Swal from "sweetalert2";
 import logo from "../images/logo.png";
 import { FaPlus } from "react-icons/fa";
-import { appUrl } from "../utils/utils";
 import { deleteById, getAll } from "../Service/StudentMarksService";
 
 const StudentMarksDetails = () => {
@@ -22,14 +21,20 @@ const StudentMarksDetails = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [notConnect, setNotConnect] = useState(false);
 
   useEffect( () => {
     handleGetAll()
   }, []);
 
   const handleGetAll = async () =>{
+    try{
     const data = await getAll()
     setMarksData(data)
+    setNotConnect(false)
+    }catch(error){
+      setNotConnect(true)
+    }
   }
 
   return (
@@ -65,7 +70,8 @@ const StudentMarksDetails = () => {
           </div>
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide md:hidden block">
-          {marksData.length === 0 ? (
+          {notConnect?<ServerNotConnect/>:(
+          marksData.length === 0 ? (
             <DataNotFound />
           ) : (
             <div className="flex flex-col gap-5">
@@ -128,10 +134,10 @@ const StudentMarksDetails = () => {
                   </div>
                 ))}
             </div>
-          )}
+          ))}
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide hidden md:block">
-          {marksData.length === 0 ? (
+            {notConnect?<ServerNotConnect/>:(marksData.length === 0 ? (
             <DataNotFound />
           ) : (
             <>
@@ -207,7 +213,7 @@ const StudentMarksDetails = () => {
                   </div>
                 ))}
             </>
-          )}
+          ))}
         </div>
       </div>
       <div

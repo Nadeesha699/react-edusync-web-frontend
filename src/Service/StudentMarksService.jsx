@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { appUrl } from "../utils/utils";
 import axios from "axios";
 
@@ -35,17 +34,40 @@ export  const  updateById = async ({id,index,name,marks}) =>{
 }
 
 export async function getAll() {
+    try {
   const result = await axios.get(`${appUrl}/studentmarks/get-all`);
   return result.data;
+  } catch (error) {
+    throw error
+  }
 }
 
 export async function getById({id}) {
+  try{
     const result = await axios.get(
         `${appUrl}/studentmarks/get-by-id/${id}`
       );
   return result.data[0];
+  } catch (error) {
+    throw error
+  }
+}
+
+export async function getByIndex({index}) {
+  try{
+    const result = await axios.get(
+        `${appUrl}/studentmarks/get-by-index/${index}`
+      );
+  return result.data;
+  } catch (error) {
+    throw error
+  }
 }
 
 export async function deleteById({ id }) {
-  await axios.delete(`${appUrl}/studentmarks/delete-by-id/${id}`);
+try
+{  await axios.delete(`${appUrl}/studentmarks/delete-by-id/${id}`);
+  } catch (error) {
+    throw error
+  }
 }

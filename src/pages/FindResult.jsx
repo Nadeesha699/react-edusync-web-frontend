@@ -1,5 +1,4 @@
 import { LuIdCard, LuSearch } from "react-icons/lu";
-import axios from "axios";
 import { useState } from "react";
 import {
   BackButton,
@@ -8,7 +7,8 @@ import {
   ResultNotFound,
   ServerNotConnect,
 } from "../components/UiComponents";
-import { appUrl, formatDate } from "../utils/utils";
+import { formatDate } from "../utils/utils";
+import { getByIndex } from "../Service/StudentMarksService";
 
 export default function FindResult() {
   const [index, setIndex] = useState("");
@@ -21,35 +21,58 @@ export default function FindResult() {
   const [loading, setLoading] = useState(false);
   const [notConnect, setNotConnect] = useState(false);
 
-  const findResult = (e) => {
+  const findResult = async (e) => {
     setLoading(true);
     e.preventDefault();
-    axios
-      .get(`${appUrl}/studentmarks/get-by-index/${index}`)
-      .then((e) => {
-        setNotConnect(false);
-        if (e.data === null) {
+    try {
+     const result = await getByIndex({index})
+      setNotConnect(false);
+        if (result === null) {
           setShowResult(false);
           setNoResult(true);
         } else {
-          setIssuedDate(formatDate(e.data.updated_at));
-          setName(e.data.student_name);
-          setMarks(e.data.marks);
-          setIndexs(e.data.student_index);
+          setIssuedDate(formatDate(result.updated_at));
+          setName(result.student_name);
+          setMarks(result.marks);
+          setIndexs(result.student_index);
           setShowResult(true);
           setNoResult(false);
         }
-      })
-      .catch(() => {
-        setShowResult(false);
+    } catch (error) {
+   setShowResult(false);
         setNoResult(false);
         setNotConnect(true);
-      })
-      .finally(() => {
-        setTimeout(() => {
+    }finally{
+       setTimeout(() => {
           setLoading(false);
         }, 500);
-      });
+    }
+    // axios
+    //   .get(`${appUrl}/studentmarks/get-by-index/${index}`)
+    //   .then((e) => {
+    //     setNotConnect(false);
+    //     if (e.data === null) {
+    //       setShowResult(false);
+    //       setNoResult(true);
+    //     } else {
+    //       setIssuedDate(formatDate(e.data.updated_at));
+    //       setName(e.data.student_name);
+    //       setMarks(e.data.marks);
+    //       setIndexs(e.data.student_index);
+    //       setShowResult(true);
+    //       setNoResult(false);
+    //     }
+    //   })
+    //   .catch(() => {
+    //     setShowResult(false);
+    //     setNoResult(false);
+    //     setNotConnect(true);
+    //   })
+    //   .finally(() => {
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //     }, 500);
+    //   });
   };
 
   return (
