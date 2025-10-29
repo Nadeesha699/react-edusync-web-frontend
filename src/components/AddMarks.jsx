@@ -1,14 +1,13 @@
-import { MdClear,MdPeople, MdLogout } from "react-icons/md";
+import { MdClear, MdPeople, MdLogout } from "react-icons/md";
 import { LoadingUi } from "../components/UiComponents";
 import { LuCalculator, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
-import { toast } from "react-toastify";
-import axios from "axios";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import logo from "../images/logo.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { appUrl } from "../utils/utils";
+import { save } from "../Service/StudentMarksService";
+import { toast } from "react-toastify";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -16,42 +15,36 @@ const AddMarks = () => {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
-    const navigate = useNavigate();
-    const [searchParams] = useSearchParams()
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  function saveMarks(e) {
+  const handeleSave = async (e) => {
     setLoading(true);
     e.preventDefault();
-    axios
-      .post(`${appUrl}/studentmarks/save`, {
-        student_index: index,
-        student_name: name,
-        marks: marks,
-      })
-      .then(() => {
-        toast.success("New mark added successfully!");
-        setIndex("");
-        setMarks("");
-        setName("");
-      })
-      .catch((e) => {
-        if (e.status === 409) {
-          toast.error("Oops! Marks for this student are already recorded.");
-        } else {
-          toast.error("Server connection issue. Please try again in a moment.");
-        }
-      })
-      .finally(() => {
-        setTimeout(() => {
+    try {
+       await save({ index, name, marks });
+      toast.success("New mark added successfully!");
+      setIndex("");
+      setMarks("");
+      setName("");
+    } catch (error) {
+      if (error.response?.status === 409) {
+        toast.error("Oops! Marks for this student are already recorded.");
+      } else {
+        toast.error("Server connection issue. Please try again in a moment.");
+      }
+    }finally{
+      setTimeout(() => {
           setLoading(false);
         }, 500);
-      });
-  }
+    }
+
+  };
 
   return (
     <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5 ">
       <form
-        onSubmit={saveMarks}
+        onSubmit={(e) => {handeleSave(e) }}
         className="bg-white rounded-lg p-5 flex flex-col gap-5"
       >
         <LuMenu

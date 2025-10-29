@@ -5,11 +5,16 @@ import { LuMenu, LuSearch } from "react-icons/lu";
 import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
 import axios from "axios";
 import StudentMarksJson from "../json/studentmarks.json";
-import { DataNotFound, StudentMobileCard, StudentWebCard } from "./UiComponents";
+import {
+  DataNotFound,
+  StudentMobileCard,
+  StudentWebCard,
+} from "./UiComponents";
 import Swal from "sweetalert2";
 import logo from "../images/logo.png";
 import { FaPlus } from "react-icons/fa";
 import { appUrl } from "../utils/utils";
+import { deleteById, getAll } from "../Service/StudentMarksService";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -18,13 +23,13 @@ const StudentMarksDetails = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    loadData();
+  useEffect( () => {
+    handleGetAll()
   }, []);
 
-  async function loadData() {
-    const result = await axios.get(`${appUrl}/studentmarks/get-all`);
-    setMarksData(result.data);
+  const handleGetAll = async () =>{
+    const data = await getAll()
+    setMarksData(data)
   }
 
   return (
@@ -111,10 +116,8 @@ const StudentMarksDetails = () => {
                               cancelButtonColor: "#327affff",
                             }).then(async (e1) => {
                               if (e1.isConfirmed) {
-                                await axios.delete(
-                                  `${appUrl}/studentmarks/delete-by-id/${e.id}`
-                                );
-                                loadData();
+                                await deleteById(e.id);
+                              await handleGetAll()
                               }
                             });
                           }}
@@ -163,7 +166,11 @@ const StudentMarksDetails = () => {
                     key={index}
                     className="w-full flex flex-row justify-between border-b-2 border-slate-700 text-slate-700 text-sm  hover:bg-slate-50 transition"
                   >
-                   <StudentWebCard/>
+                    <StudentWebCard
+                      student_index={e.student_index}
+                      student_name={e.student_name}
+                      marks={e.marks}
+                    />
                     <div className="md:w-1/6 p-2 flex flex-row justify-center gap-5">
                       <MdUpdate
                         className="text-green-500 hover:text-black duration-300 ease-in-out cursor-pointer"
@@ -190,10 +197,8 @@ const StudentMarksDetails = () => {
                             cancelButtonColor: "#327affff",
                           }).then(async (e1) => {
                             if (e1.isConfirmed) {
-                              await axios.delete(
-                                `${appUrl}/studentmarks/delete-by-id/${e.id}`
-                              );
-                              loadData();
+                              await deleteById(e.id)
+                             await handleGetAll()
                             }
                           });
                         }}

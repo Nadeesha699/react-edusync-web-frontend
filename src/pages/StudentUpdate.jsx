@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
 import { appUrl } from "../utils/utils";
+import { getById, updateById } from "../Service/StudentMarksService";
 
 export default function StudentUpdate() {
   const navigate = useNavigate();
@@ -16,28 +17,31 @@ export default function StudentUpdate() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadData();
+    handleGetById()
   }, []);
 
-  async function loadData() {
-    const result = await axios.get(
-      `${appUrl}/studentmarks/get-by-id/${atob(
+  async function handleGetById() {
+    const result = await getById({atob(
         searchParams.get("mark-id")
-      )}`
-    );
-    setIndex(result.data[0].student_index);
-    setName(result.data[0].student_name);
-    setMarks(result.data[0].marks);
+      )})
+    setIndex(result.student_index);
+    setName(result.student_name);
+    setMarks(result.marks);
   }
 
   function updateMarks(e) {
     setLoading(true);
     e.preventDefault();
-    axios
+
+    try {
+      updateById({,index,name,marks})
+    } catch (error) {
+      
+    }
+
+    
       .put(
-        `${appUrl}/studentmarks/update-by-id/${atob(
-          searchParams.get("mark-id")
-        )}`,
+        `${appUrl}/studentmarks/update-by-id/${atob(searchParams.get("mark-id"))}`,
         {
           student_index: index,
           student_name: name,
@@ -53,7 +57,7 @@ export default function StudentUpdate() {
       .finally(() => {
         setTimeout(() => {
           setLoading(false);
-          loadData();
+          handleGetById()
         }, 500);
       });
   }
