@@ -6,6 +6,7 @@ import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
 import StudentMarksJson from "../json/studentmarks.json";
 import {
   DataNotFound,
+  LoadingScreen,
   ServerNotConnect,
   StudentMobileCard,
   StudentWebCard,
@@ -18,12 +19,13 @@ import { BatchData } from "../data/LocalData";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
-  const [filterBatch, setFilterBatch] = useState("")
+  const [filterBatch, setFilterBatch] = useState("");
   const [marksData, setMarksData] = useState([StudentMarksJson]);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [notConnect, setNotConnect] = useState(false);
+  const [loadingScreen, setLoadingScreen] = useState(true);
 
   useEffect(() => {
     handleGetAll();
@@ -33,8 +35,10 @@ const StudentMarksDetails = () => {
     try {
       const data = await getAll();
       setMarksData(data);
+      setLoadingScreen(false)
       setNotConnect(false);
     } catch (error) {
+      setLoadingScreen(false)
       setNotConnect(true);
     }
   };
@@ -43,7 +47,7 @@ const StudentMarksDetails = () => {
     <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
       <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
         <LuMenu
-          size={30}
+          size={50}
           className="text-blue-700 block lg:hidden"
           onClick={() => {
             setShowMenu(true);
@@ -54,15 +58,24 @@ const StudentMarksDetails = () => {
             Student<span className="text-blue-700"> Marks</span>
           </label>
           <div className="flex flex-col lg:flex-row w-1/2 gap-5">
-          <div className="order-3 lg:order-1  ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
+            <div className="order-3 lg:order-1  ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
               <LuFilter />
-              <select onChange={(e)=>{setFilterBatch(e.target.value)}} className="w-full">
-                          {BatchData.map((e,index)=>{
-                            return(
-                           <option key={index} value={e.value}>{e.name}</option>)
-                          })}
-                        </select>
-              
+              <select
+                value={filterBatch}
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setFilterBatch(e.target.value);
+                }}
+                className="w-full"
+              >
+                {BatchData.map((e, index) => {
+                  return (
+                    <option key={index} value={e.value}>
+                      {e.name}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="order-2 lg:order-2 ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
               <LuSearch />
@@ -82,21 +95,26 @@ const StudentMarksDetails = () => {
           </div>
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide md:hidden block">
-          {notConnect ? (
+          {loadingScreen ? (
+            <LoadingScreen />
+          ) : notConnect ? (
             <ServerNotConnect />
           ) : marksData.length === 0 ? (
             <DataNotFound />
           ) : (
             <div className="flex flex-col gap-5">
               {marksData
-                .filter(
-                  (m) =>
+                .filter((m) => {
+                  const searchValue =
                     m.student_name
                       .toLowerCase()
                       .includes(searchTxt.toLowerCase()) ||
                     m.student_index.toString().includes(searchTxt) ||
-                    m.marks.toString().includes(searchTxt)
-                )
+                    m.marks.toString().includes(searchTxt);
+                  const filterValue =
+                    filterBatch === "" || m.batch === filterBatch;
+                  return filterValue && searchValue;
+                })
                 .map((e, index) => (
                   <div
                     key={index}
@@ -151,7 +169,9 @@ const StudentMarksDetails = () => {
           )}
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide hidden md:block">
-          {notConnect ? (
+          {loadingScreen ? (
+            <LoadingScreen />
+          ) : notConnect ? (
             <ServerNotConnect />
           ) : marksData.length === 0 ? (
             <DataNotFound />
@@ -170,7 +190,7 @@ const StudentMarksDetails = () => {
                 <label className="md:w-1/6 text-center truncate p-2 font-bold">
                   Student Grade
                 </label>
-                 <label className="md:w-1/6 text-center truncate p-2 font-bold">
+                <label className="md:w-1/6 text-center truncate p-2 font-bold">
                   Student Batch
                 </label>
                 <label className="md:w-1/6 text-center  truncate p-2 font-bold text-gray-500">
@@ -178,14 +198,17 @@ const StudentMarksDetails = () => {
                 </label>
               </div>
               {marksData
-                .filter(
-                  (m) =>
+                .filter((m) => {
+                  const searchValue =
                     m.student_name
                       .toLowerCase()
                       .includes(searchTxt.toLowerCase()) ||
                     m.student_index.toString().includes(searchTxt) ||
-                    m.marks.toString().includes(searchTxt)
-                )
+                    m.marks.toString().includes(searchTxt);
+                  const filterValue =
+                    filterBatch === "" || m.batch === filterBatch;
+                  return filterValue && searchValue;
+                })
                 .map((e, index) => (
                   <div
                     key={index}
@@ -223,7 +246,8 @@ const StudentMarksDetails = () => {
                             cancelButtonColor: "#327affff",
                           }).then(async (e1) => {
                             if (e1.isConfirmed) {
-                              await deleteById(e.id);
+                              const id = e.id;
+                              await deleteById({ id });
                               await handleGetAll();
                             }
                           });

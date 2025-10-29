@@ -111,6 +111,10 @@ export const ResultCard = ({ marks, indexs, name, issuedDate, batch }) => {
             <span>Information Communication Technologhy</span>
           </div>
           <div className="flex flex-row gap-2">
+            <span className="text-blue-500 font-bold">Batch:</span>
+            <span>{batch}</span>
+          </div>
+          <div className="flex flex-row gap-2">
             <span className="text-blue-500 font-bold">Issued Date:</span>
             <span>{issuedDate}</span>
           </div>
@@ -144,7 +148,12 @@ export const DataNotFound = () => {
   );
 };
 
-export const StudentMobileCard = ({ student_index, student_name, marks, batch }) => {
+export const StudentMobileCard = ({
+  student_index,
+  student_name,
+  marks,
+  batch,
+}) => {
   return (
     <div className="flex flex-row justify-between items-start gap-2">
       <div className="flex flex-col justify-start gap-2">
@@ -158,7 +167,7 @@ export const StudentMobileCard = ({ student_index, student_name, marks, batch })
         <label className=" text-center truncate flex flex-row gap-2 font-bold">
           <span className="text-blue-700">Student Marks:</span> {marks}
         </label>
-         <label className=" text-center truncate flex flex-row gap-2 font-bold">
+        <label className=" text-center truncate flex flex-row gap-2 font-bold">
           <span className="text-blue-700">Student Batch:</span> {batch}
         </label>
       </div>
@@ -177,7 +186,12 @@ export const StudentMobileCard = ({ student_index, student_name, marks, batch })
   );
 };
 
-export const StudentWebCard = ({ student_index, student_name, marks }) => {
+export const StudentWebCard = ({
+  student_index,
+  student_name,
+  marks,
+  batch,
+}) => {
   return (
     <>
       <label className="md:w-1/6 text-center truncate p-2">
@@ -209,6 +223,19 @@ export const StudentWebCard = ({ student_index, student_name, marks }) => {
           F
         </label>
       )}
+      <label className="md:w-1/6 text-center truncate p-2">{batch}</label>
     </>
+  );
+};
+
+export const LoadingScreen = () => {
+  return (
+  <div className="flex flex-col items-center justify-center h-full">
+  <div className="relative w-16 h-16">
+    <div className="absolute inset-0 border-4 border-blue-500 rounded-full animate-ping"></div>
+    <div className="absolute inset-0 border-4 border-blue-300 rounded-full animate-spin border-t-transparent"></div>
+  </div>
+  <p className="mt-6 text-xl font-bold text-blue-500 tracking-wide">Please wait...</p>
+</div>
   );
 };

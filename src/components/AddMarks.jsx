@@ -1,6 +1,13 @@
 import { MdClear, MdPeople, MdLogout } from "react-icons/md";
 import { LoadingUi } from "../components/UiComponents";
-import { LuCalculator, LuGraduationCap, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
+import {
+  LuCalculator,
+  LuGraduationCap,
+  LuIdCard,
+  LuMenu,
+  LuSend,
+  LuUser,
+} from "react-icons/lu";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
@@ -16,7 +23,7 @@ const AddMarks = () => {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
-  const [batch, setBatch] = useState("")
+  const [batch, setBatch] = useState("");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -24,12 +31,12 @@ const AddMarks = () => {
     setLoading(true);
     e.preventDefault();
     try {
-      await save({ index, name, marks,batch });
+      await save({ index, name, marks, batch });
       toast.success("New mark added successfully!");
       setIndex("");
       setMarks("");
       setName("");
-      setBatch("")
+      setBatch("");
     } catch (error) {
       if (error.response?.status === 409) {
         toast.error("Oops! Marks for this student are already recorded.");
@@ -102,12 +109,20 @@ const AddMarks = () => {
             }}
           />
         </div>
-          <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
+        <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuGraduationCap />
-          <select onChange={(e)=>{setBatch(e.target.value)}} className="w-full">
-            {BatchData.map((e,index)=>{
-              return(
-             <option key={index} value={e.value}>{e.name}</option>)
+          <select
+            onChange={(e) => {
+              setBatch(e.target.value);
+            }}
+            className="w-full"
+          >
+            {BatchData.map((e, index) => {
+              return (
+                <option key={index} value={e.value}>
+                  {e.name}
+                </option>
+              );
             })}
           </select>
         </div>

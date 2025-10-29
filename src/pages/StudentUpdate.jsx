@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { LuCalculator, LuIdCard, LuUser } from "react-icons/lu";
+import { LuCalculator, LuGraduationCap, LuIdCard, LuUser } from "react-icons/lu";
 import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi } from "../components/UiComponents";
+import { BackButton, LoadingUi, ServerNotConnect } from "../components/UiComponents";
 import { getById, updateById } from "../Service/StudentMarksService";
+import { BatchData } from "../data/LocalData";
 
 export default function StudentUpdate() {
   const navigate = useNavigate();
@@ -12,27 +13,38 @@ export default function StudentUpdate() {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
+  const [batch,setBatch] = useState("")
   const [loading, setLoading] = useState(false);
+  const [notConnect, setNotConnect] = useState(true);
+
 
   useEffect(() => {
     handleGetById();
   }, []);
 
   async function handleGetById() {
+    try{
     const id = atob(searchParams.get("mark-id"));
     const result = await getById({ id });
     setIndex(result.student_index);
     setName(result.student_name);
     setMarks(result.marks);
+    setBatch(result.batch);
+  setNotConnect(false)
+  }
+    catch(error){
+      setNotConnect(true)
+    }
   }
 
-  function updateMarks(e) {
+ async function updateMarks(e) {
     setLoading(true);
     const id = atob(searchParams.get("mark-id"));
     e.preventDefault();
 
     try {
-      updateById({ id, index, name, marks });
+     await updateById({ id, index, name, marks, batch });
+     toast.success("Student updated successfully!");
     } catch (error) {
       toast.error("Server connection issue. Please try again in a moment.");
     } finally {
@@ -46,6 +58,7 @@ export default function StudentUpdate() {
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BackButton />
+      {notConnect?<ServerNotConnect/>:
       <form
         onSubmit={updateMarks}
         className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"
@@ -91,6 +104,15 @@ export default function StudentUpdate() {
             }}
           />
         </div>
+          <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
+          <LuGraduationCap />
+          <select onChange={(e)=>{setBatch(e.target.value)}} value={batch} className="w-full">
+            {BatchData.map((e,index)=>{
+              return(
+             <option key={index} value={e.value}>{e.name}</option>)
+            })}
+          </select>
+        </div>
         <div className="flex flex-row gap-5 justify-start">
           <button
             type="submit"
@@ -119,7 +141,7 @@ export default function StudentUpdate() {
             cancel
           </button>
         </div>
-      </form>
+      </form>}
     </div>
   );
 }

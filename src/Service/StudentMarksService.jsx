@@ -11,8 +11,12 @@ export async function save({ index, name, marks, batch }) {
       batch: batch
     })
 
+    
+
     return result.data}
-    catch(error){
+    catch(error)
+    {
+      console.log(error.message)
       throw error
     }
 }
@@ -68,6 +72,7 @@ export async function getByIndex({index}) {
 
 export async function deleteById({ id }) {
 try
+
 {  await axios.delete(`${appUrl}/studentmarks/delete-by-id/${id}`);
   } catch (error) {
     throw error
