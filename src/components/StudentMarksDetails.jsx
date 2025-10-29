@@ -23,19 +23,19 @@ const StudentMarksDetails = () => {
   const [searchParams] = useSearchParams();
   const [notConnect, setNotConnect] = useState(false);
 
-  useEffect( () => {
-    handleGetAll()
+  useEffect(() => {
+    handleGetAll();
   }, []);
 
-  const handleGetAll = async () =>{
-    try{
-    const data = await getAll()
-    setMarksData(data)
-    setNotConnect(false)
-    }catch(error){
-      setNotConnect(true)
+  const handleGetAll = async () => {
+    try {
+      const data = await getAll();
+      setMarksData(data);
+      setNotConnect(false);
+    } catch (error) {
+      setNotConnect(true);
     }
-  }
+  };
 
   return (
     <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
@@ -70,8 +70,9 @@ const StudentMarksDetails = () => {
           </div>
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide md:hidden block">
-          {notConnect?<ServerNotConnect/>:(
-          marksData.length === 0 ? (
+          {notConnect ? (
+            <ServerNotConnect />
+          ) : marksData.length === 0 ? (
             <DataNotFound />
           ) : (
             <div className="flex flex-col gap-5">
@@ -123,7 +124,7 @@ const StudentMarksDetails = () => {
                             }).then(async (e1) => {
                               if (e1.isConfirmed) {
                                 await deleteById(e.id);
-                              await handleGetAll()
+                                await handleGetAll();
                               }
                             });
                           }}
@@ -134,10 +135,12 @@ const StudentMarksDetails = () => {
                   </div>
                 ))}
             </div>
-          ))}
+          )}
         </div>
         <div className="w-full h-full overflow-auto scrollbar-hide hidden md:block">
-            {notConnect?<ServerNotConnect/>:(marksData.length === 0 ? (
+          {notConnect ? (
+            <ServerNotConnect />
+          ) : marksData.length === 0 ? (
             <DataNotFound />
           ) : (
             <>
@@ -203,8 +206,8 @@ const StudentMarksDetails = () => {
                             cancelButtonColor: "#327affff",
                           }).then(async (e1) => {
                             if (e1.isConfirmed) {
-                              await deleteById(e.id)
-                             await handleGetAll()
+                              await deleteById(e.id);
+                              await handleGetAll();
                             }
                           });
                         }}
@@ -213,7 +216,7 @@ const StudentMarksDetails = () => {
                   </div>
                 ))}
             </>
-          ))}
+          )}
         </div>
       </div>
       <div

@@ -15,12 +15,12 @@ export default function StudentUpdate() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    handleGetById()
+    handleGetById();
   }, []);
 
   async function handleGetById() {
-    const id = atob(searchParams.get("mark-id"))
-    const result = await getById({id})
+    const id = atob(searchParams.get("mark-id"));
+    const result = await getById({ id });
     setIndex(result.student_index);
     setName(result.student_name);
     setMarks(result.marks);
@@ -28,20 +28,19 @@ export default function StudentUpdate() {
 
   function updateMarks(e) {
     setLoading(true);
-    const id = atob(searchParams.get("mark-id"))
+    const id = atob(searchParams.get("mark-id"));
     e.preventDefault();
 
     try {
-      updateById({id,index,name,marks})
+      updateById({ id, index, name, marks });
     } catch (error) {
       toast.error("Server connection issue. Please try again in a moment.");
-    }finally{
+    } finally {
       setTimeout(() => {
-          setLoading(false);
-          handleGetById()
-        }, 500);
+        setLoading(false);
+        handleGetById();
+      }, 500);
     }
-
   }
 
   return (

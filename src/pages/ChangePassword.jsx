@@ -26,9 +26,10 @@ export default function ChangePassword() {
     const id = atob(
         searchParams.get("id")
       )
-    const result = getById({id})
+    const result = await getById({id})
+    
     setEmail(result.email);
-    setName(result.student_name);
+    setName(result.name);
     setPhoneNumber(result.phone_number);
   };
 
@@ -39,7 +40,7 @@ export default function ChangePassword() {
           searchParams.get("id")
         )
 try {
-      await updateById({id, name,phoneNumber,email,confirmPassword})
+    await updateById({id, name, phoneNumber, email, confirmPassword})
 navigate("/login");
         toast.success("Success! Your password has been updated ✅"); 
 } catch (error) {

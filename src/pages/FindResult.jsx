@@ -25,27 +25,27 @@ export default function FindResult() {
     setLoading(true);
     e.preventDefault();
     try {
-     const result = await getByIndex({index})
+      const result = await getByIndex({ index });
       setNotConnect(false);
-        if (result === null) {
-          setShowResult(false);
-          setNoResult(true);
-        } else {
-          setIssuedDate(formatDate(result.updated_at));
-          setName(result.student_name);
-          setMarks(result.marks);
-          setIndexs(result.student_index);
-          setShowResult(true);
-          setNoResult(false);
-        }
-    } catch (error) {
-   setShowResult(false);
+      if (result === null) {
+        setShowResult(false);
+        setNoResult(true);
+      } else {
+        setIssuedDate(formatDate(result.updated_at));
+        setName(result.student_name);
+        setMarks(result.marks);
+        setIndexs(result.student_index);
+        setShowResult(true);
         setNoResult(false);
-        setNotConnect(true);
-    }finally{
-       setTimeout(() => {
-          setLoading(false);
-        }, 500);
+      }
+    } catch (error) {
+      setShowResult(false);
+      setNoResult(false);
+      setNotConnect(true);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
     // axios
     //   .get(`${appUrl}/studentmarks/get-by-index/${index}`)

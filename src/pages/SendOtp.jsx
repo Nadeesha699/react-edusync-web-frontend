@@ -16,15 +16,16 @@ export default function SendOtp() {
 
     try {
       const result = await verifyEmail({ email });
-      if (result.data) {
+      if (result) {
         try {
-          const result = await sendOtp({ email });
+          const result01 = await sendOtp({ email });
           const otpData = {
-            value: result.otp,
+            value: result01.otp,
             expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
             // expiry: Date.now() + 10 * 1000,
           };
           sessionStorage.setItem("otp", JSON.stringify(otpData));
+          toast.success(`OTP has been sent successfully to ${email}`);
           navigate(`/verify-otp?email=${btoa(email)}&id=${btoa(result.id)}`);
         } catch (error) {
           toast.error("Server connection issue. Please try again in a moment.");
@@ -33,49 +34,16 @@ export default function SendOtp() {
         toast.error("Hmm… that email doesn’t match our records. Try again.");
       }
     } catch (error) {
-      toast.error("Server connection issue. Please try again in a moment.");
+      if (error.response?.status === 404) {
+        toast.error("Hmm… that email doesn’t match our records. Try again.");
+      } else if (error.response?.status === 500) {
+        toast.error("Server connection issue. Please try again in a moment.");
+      }
     } finally {
       setTimeout(() => {
         setLoading(false);
       }, 500);
     }
-
-    // axios
-    //   .post(`${appUrl}/teachers/verify-email/${email}`)
-    //   .then((e) => {
-    //     if (e.data) {
-    //       axios
-    //         .post(`${appUrl}/email/send_otp`, {
-    //           receiver_email: email,
-    //         })
-    //         .then((e1) => {
-    //           const otpData = {
-    //             value: e1.data.otp,
-    //             expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-    //             // expiry: Date.now() + 10 * 1000,
-    //           };
-    //           sessionStorage.setItem("otp", JSON.stringify(otpData));
-    //           navigate(
-    //             `/verify-otp?email=${btoa(email)}&id=${btoa(e.data.id)}`
-    //           );
-    //         })
-    //         .catch(() => {
-    //           toast.error(
-    //             "Server connection issue. Please try again in a moment."
-    //           );
-    //         });
-    //     } else {
-    //       toast.error("Hmm… that email doesn’t match our records. Try again.");
-    //     }
-    //   })
-    //   .catch(() => {
-    //     toast.error("Server connection issue. Please try again in a moment.");
-    //   })
-    //   .finally(() => {
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //     }, 500);
-    //   });
   }
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">

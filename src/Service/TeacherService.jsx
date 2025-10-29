@@ -48,7 +48,7 @@ try {
 
 export const updateById =  async ({id, name, phoneNumber ,email, confirmPassword}) =>{
     try{
-const result = await axios
+await axios
       .put(
         `${appUrl}/teachers/update-by-id/${id}`,
         {
@@ -57,9 +57,7 @@ const result = await axios
           email: email,
           password: confirmPassword,
         }
-      )
-
-      return result.data}
+      )}
       catch(error){
         throw error
       }

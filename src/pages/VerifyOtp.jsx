@@ -25,19 +25,23 @@ export default function VerifyOtp() {
     setLoading(true);
     const storedOtp = sessionStorage.getItem("otp");
     const parseOtp = JSON.parse(storedOtp);
-    if (parseOtp.expiry > Date.now()) {
-      console.log(parseOtp.value);
-      console.log(n1 + n2 + n3 + n4 + n5 + n6);
-      if (parseOtp.value.toString() === `${n1}${n2}${n3}${n4}${n5}${n6}`) {
-        sessionStorage.clear();
-        navigate(`/change-password?id=${searchParams.get("id")}`);
+    if (parseOtp) {
+      if (parseOtp.expiry > Date.now()) {
+        console.log(parseOtp.value);
+        console.log(n1 + n2 + n3 + n4 + n5 + n6);
+        if (parseOtp.value.toString() === `${n1}${n2}${n3}${n4}${n5}${n6}`) {
+          sessionStorage.clear();
+          navigate(`/change-password?id=${searchParams.get("id")}`);
+        } else {
+          toast.error(
+            "Oops! The OTP you entered doesn’t match. Please try again."
+          );
+        }
       } else {
-        toast.error(
-          "Oops! The OTP you entered doesn’t match. Please try again."
-        );
+        toast.error("This OTP has expired. Please request a new one.");
       }
     } else {
-      toast.error("This OTP has expired. Please request a new one.");
+      toast.error("Server connection issue. Please try again in a moment.");
     }
 
     setTimeout(() => {
@@ -47,33 +51,18 @@ export default function VerifyOtp() {
 
   const resendOtp = async () => {
     try {
-         const email = atob(searchParams.get("email"))
-   const result = await sendOtp({email})
-    const otpData = {
-          value: result.otp,
-          expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-        };
-        sessionStorage.setItem("otp", JSON.stringify(otpData));
-        window.location.reload();
+      const email = atob(searchParams.get("email"));
+      const result = await sendOtp({ email });
+      const otpData = {
+        value: result.otp,
+        expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
+      };
+      sessionStorage.setItem("otp", JSON.stringify(otpData));
+      window.location.reload();
     } catch (error) {
       toast.error("Server connection issue. Please try again in a moment.");
+      sessionStorage.removeItem("otp");
     }
- 
-    // axios
-    //   .post(`${appUrl}/email/send_otp`, {
-    //     receiver_email: atob(searchParams.get("email")),
-    //   })
-    //   .then((e1) => {
-    //     const otpData = {
-    //       value: e1.data.otp,
-    //       expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-    //     };
-    //     sessionStorage.setItem("otp", JSON.stringify(otpData));
-    //     window.location.reload();
-    //   })
-    //   .catch(() => {
-    //     toast.error("Server connection issue. Please try again in a moment.");
-    //   });
   };
 
   return (

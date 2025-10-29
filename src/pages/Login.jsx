@@ -3,10 +3,7 @@ import { LuEye, LuEyeOff, LuLock, LuLogIn, LuMail } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 import { toast } from "react-toastify";
-import {
-  LoadingUi,
-  LoginBackButton,
-} from "../components/UiComponents";
+import { LoadingUi, LoginBackButton } from "../components/UiComponents";
 import { login } from "../Service/TeacherService";
 
 export default function Login() {
@@ -16,58 +13,35 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin =  async (e)  => {
+  const handleLogin = async (e) => {
     setLoading(true);
     e.preventDefault();
-    try{
-
-   const result = await login({email,password})
-    toast.success("Login successful! Welcome back 👋");
-        navigate(`/home?user_id=${btoa(result.user_id)}`);
-    }catch(error){
-if(error.response?.status === 401){
-toast.error(
-            "Incorrect credentials. Please check your details and try again."
-          );
-}else if(error.response?.status === 500){
-toast.error("Server connection issue. Please try again in a moment.");
-}
-    }finally{
-       setTimeout(() => {
-          setLoading(false);
-        }, 500);
+    try {
+      const result = await login({ email, password });
+      toast.success("Login successful! Welcome back 👋");
+      navigate(`/home?user_id=${btoa(result.user_id)}`);
+    } catch (error) {
+      if (error.response?.status === 401) {
+        toast.error(
+          "Incorrect credentials. Please check your details and try again."
+        );
+      } else if (error.response?.status === 500) {
+        toast.error("Server connection issue. Please try again in a moment.");
+      }
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
-
-    // axios
-    //   .post(`${appUrl}/teachers/login`, {
-    //     email: email,
-    //     password: password,
-    //   })
-    //   .then((e1) => {
-    //     toast.success("Login successful! Welcome back 👋");
-    //     navigate(`/home?user_id=${btoa(e1.data.user_id)}`);
-    //   })
-    //   .catch((e) => {
-    //     if (e.status === 401) {
-    //       toast.error(
-    //         "Incorrect credentials. Please check your details and try again."
-    //       );
-    //     } else if (e.status === 500) {
-    //       toast.error("Server connection issue. Please try again in a moment.");
-    //     }
-    //   })
-    //   .finally(() => {
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //     }, 500);
-    //   });
   };
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <LoginBackButton />
       <form
-        onSubmit={(e)=>{handleLogin(e)}}
+        onSubmit={(e) => {
+          handleLogin(e);
+        }}
         className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex justify-center items-center">

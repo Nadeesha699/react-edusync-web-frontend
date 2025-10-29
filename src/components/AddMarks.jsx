@@ -22,7 +22,7 @@ const AddMarks = () => {
     setLoading(true);
     e.preventDefault();
     try {
-       await save({ index, name, marks });
+      await save({ index, name, marks });
       toast.success("New mark added successfully!");
       setIndex("");
       setMarks("");
@@ -33,18 +33,19 @@ const AddMarks = () => {
       } else {
         toast.error("Server connection issue. Please try again in a moment.");
       }
-    }finally{
+    } finally {
       setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        setLoading(false);
+      }, 500);
     }
-
   };
 
   return (
     <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5 ">
       <form
-        onSubmit={(e) => {handeleSave(e) }}
+        onSubmit={(e) => {
+          handeleSave(e);
+        }}
         className="bg-white rounded-lg p-5 flex flex-col gap-5"
       >
         <LuMenu
