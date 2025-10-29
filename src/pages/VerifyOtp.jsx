@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import { LuBadgeCheck } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { BackButton, LoadingUi } from "../components/UiComponents";
-import { appUrl } from "../utils/utils";
+import { sendOtp } from "../Service/TeacherService";
 
 export default function VerifyOtp() {
   const navigate = useNavigate();
@@ -46,22 +45,35 @@ export default function VerifyOtp() {
     }, 500);
   };
 
-  const resendOtp = () => {
-    axios
-      .post(`${appUrl}/email/send_otp`, {
-        receiver_email: atob(searchParams.get("email")),
-      })
-      .then((e1) => {
-        const otpData = {
-          value: e1.data.otp,
+  const resendOtp = async () => {
+    try {
+         const email = atob(searchParams.get("email"))
+   const result = await sendOtp({email})
+    const otpData = {
+          value: result.otp,
           expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
         };
         sessionStorage.setItem("otp", JSON.stringify(otpData));
         window.location.reload();
-      })
-      .catch(() => {
-        toast.error("Server connection issue. Please try again in a moment.");
-      });
+    } catch (error) {
+      toast.error("Server connection issue. Please try again in a moment.");
+    }
+ 
+    // axios
+    //   .post(`${appUrl}/email/send_otp`, {
+    //     receiver_email: atob(searchParams.get("email")),
+    //   })
+    //   .then((e1) => {
+    //     const otpData = {
+    //       value: e1.data.otp,
+    //       expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
+    //     };
+    //     sessionStorage.setItem("otp", JSON.stringify(otpData));
+    //     window.location.reload();
+    //   })
+    //   .catch(() => {
+    //     toast.error("Server connection issue. Please try again in a moment.");
+    //   });
   };
 
   return (

@@ -2,10 +2,9 @@ import { MdUpdate } from "react-icons/md";
 import { LuEye, LuEyeOff, LuLock } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
-import { appUrl } from "../utils/utils";
+import { getById, updateById } from "../Service/TeacherService";
 
 export default function ChangePassword() {
   const navigate = useNavigate();
@@ -24,51 +23,66 @@ export default function ChangePassword() {
   });
 
   const loadData = async () => {
-    const result = await axios.get(
-      `${appUrl}/teachers/get-by-id/${atob(
+    const id = atob(
         searchParams.get("id")
-      )}`
-    );
-    setEmail(result.data[0].email);
-    setName(result.data[0].student_name);
-    setPhoneNumber(result.data[0].phone_number);
+      )
+    const result = getById({id})
+    setEmail(result.email);
+    setName(result.student_name);
+    setPhoneNumber(result.phone_number);
   };
 
   const changePassword = async (e) => {
     setLoading(true);
     e.preventDefault();
-
-    axios
-      .put(
-        `${appUrl}/teachers/update-by-id/${atob(
+    const id = atob(
           searchParams.get("id")
-        )}`,
-        {
-          name: name,
-          phone_number: phoneNumber,
-          email: email,
-          password: confirmPassword,
-        }
-      )
-      .then(() => {
-        navigate("/login");
-        toast.success("Success! Your password has been updated ✅");
-      })
-      .catch(() => {
-        toast.error("Server connection issue. Please try again in a moment.");
-      })
-      .finally(() => {
-        setTimeout(() => {
+        )
+try {
+      await updateById({id, name,phoneNumber,email,confirmPassword})
+navigate("/login");
+        toast.success("Success! Your password has been updated ✅"); 
+} catch (error) {
+   toast.error("Server connection issue. Please try again in a moment.");
+} finally{
+   setTimeout(() => {
           setLoading(false);
         }, 500);
-      });
+}
+
+    
+    
+      //   axios
+      // .put(
+      //   `${appUrl}/teachers/update-by-id/${atob(
+      //     searchParams.get("id")
+      //   )}`,
+      //   {
+      //     name: name,
+      //     phone_number: phoneNumber,
+      //     email: email,
+      //     password: confirmPassword,
+      //   }
+      // )
+      // .then(() => {
+      //   navigate("/login");
+      //   toast.success("Success! Your password has been updated ✅");
+      // })
+      // .catch(() => {
+      //   toast.error("Server connection issue. Please try again in a moment.");
+      // })
+      // .finally(() => {
+      //   setTimeout(() => {
+      //     setLoading(false);
+      //   }, 500);
+      // });
   };
 
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BackButton />
       <form
-        onSubmit={changePassword}
+        onSubmit={(e)=>{changePassword(e)}}
         className="bg-white lg:w-1/3 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex  flex-col gap-2 justify-center items-center text-center">

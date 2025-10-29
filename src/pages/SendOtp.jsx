@@ -1,64 +1,89 @@
 import { useState } from "react";
 import { LuMail, LuSend } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
-import { appUrl } from "../utils/utils";
+import { sendOtp, verifyEmail } from "../Service/TeacherService";
 
 export default function SendOtp() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  function sendOtp(e) {
+  async function handleSendOtp(e) {
     setLoading(true);
     e.preventDefault();
 
-    axios
-      .post(`${appUrl}/teachers/verify-email/${email}`, {
-        email: email,
-      })
-      .then((e) => {
-        if (e.data) {
-          axios
-            .post(`${appUrl}/email/send_otp`, {
-              receiver_email: email,
-            })
-            .then((e1) => {
-              const otpData = {
-                value: e1.data.otp,
-                expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-                // expiry: Date.now() + 10 * 1000,
-              };
-              sessionStorage.setItem("otp", JSON.stringify(otpData));
-              navigate(
-                `/verify-otp?email=${btoa(email)}&id=${btoa(e.data.id)}`
-              );
-            })
-            .catch(() => {
-              toast.error(
-                "Server connection issue. Please try again in a moment."
-              );
-            });
-        } else {
-          toast.error("Hmm… that email doesn’t match our records. Try again.");
+    try {
+      const result = await verifyEmail({ email });
+      if (result.data) {
+        try {
+          const result = await sendOtp({ email });
+          const otpData = {
+            value: result.otp,
+            expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
+            // expiry: Date.now() + 10 * 1000,
+          };
+          sessionStorage.setItem("otp", JSON.stringify(otpData));
+          navigate(`/verify-otp?email=${btoa(email)}&id=${btoa(result.id)}`);
+        } catch (error) {
+          toast.error("Server connection issue. Please try again in a moment.");
         }
-      })
-      .catch(() => {
-        toast.error("Server connection issue. Please try again in a moment.");
-      })
-      .finally(() => {
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
-      });
+      } else {
+        toast.error("Hmm… that email doesn’t match our records. Try again.");
+      }
+    } catch (error) {
+      toast.error("Server connection issue. Please try again in a moment.");
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
+
+    // axios
+    //   .post(`${appUrl}/teachers/verify-email/${email}`)
+    //   .then((e) => {
+    //     if (e.data) {
+    //       axios
+    //         .post(`${appUrl}/email/send_otp`, {
+    //           receiver_email: email,
+    //         })
+    //         .then((e1) => {
+    //           const otpData = {
+    //             value: e1.data.otp,
+    //             expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
+    //             // expiry: Date.now() + 10 * 1000,
+    //           };
+    //           sessionStorage.setItem("otp", JSON.stringify(otpData));
+    //           navigate(
+    //             `/verify-otp?email=${btoa(email)}&id=${btoa(e.data.id)}`
+    //           );
+    //         })
+    //         .catch(() => {
+    //           toast.error(
+    //             "Server connection issue. Please try again in a moment."
+    //           );
+    //         });
+    //     } else {
+    //       toast.error("Hmm… that email doesn’t match our records. Try again.");
+    //     }
+    //   })
+    //   .catch(() => {
+    //     toast.error("Server connection issue. Please try again in a moment.");
+    //   })
+    //   .finally(() => {
+    //     setTimeout(() => {
+    //       setLoading(false);
+    //     }, 500);
+    //   });
   }
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BackButton />
       <form
-        onSubmit={sendOtp}
+        onSubmit={(e) => {
+          handleSendOtp(e);
+        }}
         className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center">
