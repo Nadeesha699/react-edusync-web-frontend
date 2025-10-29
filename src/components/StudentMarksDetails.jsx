@@ -1,7 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
-import { LuMenu, LuSearch } from "react-icons/lu";
+import { LuFilter, LuMenu, LuSearch } from "react-icons/lu";
 import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
 import StudentMarksJson from "../json/studentmarks.json";
 import {
@@ -14,9 +14,11 @@ import Swal from "sweetalert2";
 import logo from "../images/logo.png";
 import { FaPlus } from "react-icons/fa";
 import { deleteById, getAll } from "../Service/StudentMarksService";
+import { BatchData } from "../data/LocalData";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
+  const [filterBatch, setFilterBatch] = useState("")
   const [marksData, setMarksData] = useState([StudentMarksJson]);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
@@ -47,12 +49,22 @@ const StudentMarksDetails = () => {
             setShowMenu(true);
           }}
         />
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row justify-between items-start lg:items-center">
           <label className="font-bold text-5xl text-gray-500">
             Student<span className="text-blue-700"> Marks</span>
           </label>
-          <div className="flex flex-col lg:flex-row w-1/3 gap-5">
-            <div className="order-2 lg:order-1 ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
+          <div className="flex flex-col lg:flex-row w-1/2 gap-5">
+          <div className="order-3 lg:order-1  ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
+              <LuFilter />
+              <select onChange={(e)=>{setFilterBatch(e.target.value)}} className="w-full">
+                          {BatchData.map((e,index)=>{
+                            return(
+                           <option key={index} value={e.value}>{e.name}</option>)
+                          })}
+                        </select>
+              
+            </div>
+            <div className="order-2 lg:order-2 ring-blue-700 ring-1 flex flex-row rounded-lg items-center duration-300 ease-in cursor-pointer w-full lg:w-1/2 p-2 gap-2">
               <LuSearch />
               <input
                 className="w-full bg-transparent focus:outline-none focus:ring-0"
@@ -63,7 +75,7 @@ const StudentMarksDetails = () => {
                 }}
               />
             </div>
-            <div className="order-1 lg:order-2 bg-blue-700 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white">
+            <div className="order-1 lg:order-3 bg-blue-700 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white">
               <BiExport />
               <label className="truncate">export data</label>
             </div>
@@ -94,6 +106,7 @@ const StudentMarksDetails = () => {
                       student_index={e.student_index}
                       student_name={e.student_name}
                       marks={e.marks}
+                      batch={e.batch}
                     />
                     <div className="flex flex-row justify-center gap-5 w-full">
                       <div className="p-2 flex flex-row justify-center gap-2 rounded-lg border border-1 border-green-500 text-green-500 font-bold items-center w-1/2">
@@ -157,6 +170,9 @@ const StudentMarksDetails = () => {
                 <label className="md:w-1/6 text-center truncate p-2 font-bold">
                   Student Grade
                 </label>
+                 <label className="md:w-1/6 text-center truncate p-2 font-bold">
+                  Student Batch
+                </label>
                 <label className="md:w-1/6 text-center  truncate p-2 font-bold text-gray-500">
                   Action
                 </label>
@@ -179,6 +195,7 @@ const StudentMarksDetails = () => {
                       student_index={e.student_index}
                       student_name={e.student_name}
                       marks={e.marks}
+                      batch={e.batch}
                     />
                     <div className="md:w-1/6 p-2 flex flex-row justify-center gap-5">
                       <MdUpdate

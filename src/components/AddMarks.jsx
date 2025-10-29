@@ -1,6 +1,6 @@
 import { MdClear, MdPeople, MdLogout } from "react-icons/md";
 import { LoadingUi } from "../components/UiComponents";
-import { LuCalculator, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
+import { LuCalculator, LuGraduationCap, LuIdCard, LuMenu, LuSend, LuUser } from "react-icons/lu";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
@@ -8,6 +8,7 @@ import logo from "../images/logo.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { save } from "../Service/StudentMarksService";
 import { toast } from "react-toastify";
+import { BatchData } from "../data/LocalData";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ const AddMarks = () => {
   const [index, setIndex] = useState("");
   const [marks, setMarks] = useState("");
   const [name, setName] = useState("");
+  const [batch, setBatch] = useState("")
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -22,11 +24,12 @@ const AddMarks = () => {
     setLoading(true);
     e.preventDefault();
     try {
-      await save({ index, name, marks });
+      await save({ index, name, marks,batch });
       toast.success("New mark added successfully!");
       setIndex("");
       setMarks("");
       setName("");
+      setBatch("")
     } catch (error) {
       if (error.response?.status === 409) {
         toast.error("Oops! Marks for this student are already recorded.");
@@ -98,6 +101,15 @@ const AddMarks = () => {
               setMarks(e.target.value);
             }}
           />
+        </div>
+          <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
+          <LuGraduationCap />
+          <select onChange={(e)=>{setBatch(e.target.value)}} className="w-full">
+            {BatchData.map((e,index)=>{
+              return(
+             <option key={index} value={e.value}>{e.name}</option>)
+            })}
+          </select>
         </div>
         <div className="flex flex-row gap-5 justify-start">
           <button

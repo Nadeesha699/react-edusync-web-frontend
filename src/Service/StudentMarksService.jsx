@@ -1,13 +1,14 @@
 import { appUrl } from "../utils/utils";
 import axios from "axios";
 
-export async function save({ index, name, marks }) {
+export async function save({ index, name, marks, batch }) {
   try{
  const result = await axios
     .post(`${appUrl}/studentmarks/save`, {
       student_index: index,
       student_name: name,
       marks: marks,
+      batch: batch
     })
 
     return result.data}
@@ -16,7 +17,7 @@ export async function save({ index, name, marks }) {
     }
 }
 
-export  const  updateById = async ({id,index,name,marks}) =>{
+export  const  updateById = async ({id, index, name, marks, batch}) =>{
   try {
   const result = await axios
       .put(
@@ -25,6 +26,7 @@ export  const  updateById = async ({id,index,name,marks}) =>{
           student_index: index,
           student_name: name,
           marks: marks,
+          batch: batch
         }
       )
       return result.data

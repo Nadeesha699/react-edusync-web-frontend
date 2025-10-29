@@ -88,7 +88,7 @@ export const ServerNotConnect = () => {
   );
 };
 
-export const ResultCard = ({ marks, indexs, name, issuedDate }) => {
+export const ResultCard = ({ marks, indexs, name, issuedDate, batch }) => {
   return (
     <div className="bg-blue-100 w-full flex flex-col gap-5 jutify-center items-center rounded-lg p-5">
       <label className="text-2xl font-bold"> Results</label>
@@ -144,7 +144,7 @@ export const DataNotFound = () => {
   );
 };
 
-export const StudentMobileCard = ({ student_index, student_name, marks }) => {
+export const StudentMobileCard = ({ student_index, student_name, marks, batch }) => {
   return (
     <div className="flex flex-row justify-between items-start gap-2">
       <div className="flex flex-col justify-start gap-2">
@@ -157,6 +157,9 @@ export const StudentMobileCard = ({ student_index, student_name, marks }) => {
         </label>
         <label className=" text-center truncate flex flex-row gap-2 font-bold">
           <span className="text-blue-700">Student Marks:</span> {marks}
+        </label>
+         <label className=" text-center truncate flex flex-row gap-2 font-bold">
+          <span className="text-blue-700">Student Batch:</span> {batch}
         </label>
       </div>
       {marks >= 75 ? (
