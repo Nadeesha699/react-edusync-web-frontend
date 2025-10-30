@@ -8,7 +8,7 @@ import {
   LuSend,
   LuUser,
 } from "react-icons/lu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import logo from "../images/logo.png";
@@ -17,6 +17,7 @@ import { save } from "../Service/StudentMarksService";
 import { toast } from "react-toastify";
 import { BatchData } from "../data/LocalData";
 import { CgProfile } from "react-icons/cg";
+import { getById } from "../Service/TeacherService";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -27,6 +28,7 @@ const AddMarks = () => {
   const [batch, setBatch] = useState("");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const [username, setUserName] = useState("loading...");
 
   const handeleSave = async (e) => {
     setLoading(true);
@@ -51,19 +53,33 @@ const AddMarks = () => {
     }
   };
 
+  useEffect(() => {
+    handelSetUserName();
+  }, []);
+
+  const handelSetUserName = async () => {
+    try {
+      const id = atob(searchParams.get("user_id"));
+      const result = await getById({ id });
+      setUserName(result.name);
+    } catch (error) {
+      setUserName("N/A");
+    }
+  };
+
   return (
     <div className="w-full flex flex-col gap-2 lg:w-5/6 w-full bg-transparent lg:pr-5 lg:pt-5 lg:pb-5 p-5">
       <div className="bg-white w-full p-2 rounded-lg flex justify-between items-center lg:justify-end lg:items-end">
         <LuMenu
-            size={30}
-            className="text-blue-700 block lg:hidden"
-            onClick={() => {
-              setShowMenu(true);
-            }}
-          />
+          size={30}
+          className="text-blue-700 block lg:hidden"
+          onClick={() => {
+            setShowMenu(true);
+          }}
+        />
         <div className="flex flex-row gap-2 p-2 bg-gray-300 rounded-full w-fit justify-center items-center">
           <CgProfile /> login as
-          <span className="text-blue-600 font-bold">Nadeesha</span>
+          <span className="text-blue-600 font-bold">{username}</span>
         </div>
       </div>
 
@@ -74,7 +90,7 @@ const AddMarks = () => {
           }}
           className="bg-white rounded-lg p-5 flex flex-col gap-5"
         >
-          <label className="font-bold text-gray-500 text-5xl">
+          <label className="font-bold text-gray-500 text-4xl lg:text-5xl">
             Add<span className="text-blue-700"> Marks</span>{" "}
           </label>
           <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
@@ -121,7 +137,7 @@ const AddMarks = () => {
           <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
             <LuGraduationCap />
             <select
-            required
+              required
               onChange={(e) => {
                 setBatch(e.target.value);
               }}

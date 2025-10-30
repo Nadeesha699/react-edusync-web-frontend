@@ -7,6 +7,7 @@ import StudentMarksJson from "../json/studentmarks.json";
 import {
   DataNotFound,
   LoadingScreen,
+  LoadingUi,
   ServerNotConnect,
   StudentMobileCard,
   StudentWebCard,
@@ -17,6 +18,13 @@ import { FaPlus } from "react-icons/fa";
 import { deleteById, getAll } from "../Service/StudentMarksService";
 import { BatchData } from "../data/LocalData";
 import { CgProfile } from "react-icons/cg";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import Modal from "react-modal";
+import { exportAsCsv, exportAsPdf, setGrade } from "../utils/utils";
+import { getById } from "../Service/TeacherService";
+
+Modal.setAppElement("#root");
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -27,10 +35,25 @@ const StudentMarksDetails = () => {
   const [searchParams] = useSearchParams();
   const [notConnect, setNotConnect] = useState(false);
   const [loadingScreen, setLoadingScreen] = useState(true);
+  const [loading01, setLoading01] = useState(false);
+  const [loading02, setLoading02] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [username, setUserName] = useState("loading...");
 
   useEffect(() => {
     handleGetAll();
+    handelSetUserName();
   }, []);
+
+  const handelSetUserName = async () => {
+    try {
+      const id = atob(searchParams.get("user_id"));
+      const result = await getById({ id });
+      setUserName(result.name);
+    } catch (error) {
+      setUserName("N/A");
+    }
+  };
 
   const handleGetAll = async () => {
     try {
@@ -42,6 +65,32 @@ const StudentMarksDetails = () => {
       setLoadingScreen(false);
       setNotConnect(true);
     }
+  };
+
+  const handleExportAsCsv = async () => {
+    setLoading01(true);
+
+    await exportAsCsv({ marksData });
+
+    setInterval(() => {
+      setLoading01(false);
+      setOpen(false);
+    }, 500);
+  };
+
+  const handleExportAsPdf = async () => {
+    setLoading02(true);
+
+    await exportAsPdf({ marksData });
+
+    setInterval(() => {
+      setLoading02(false);
+      setOpen(false);
+    }, 500);
+  };
+
+  const openExportModel = () => {
+    setOpen(true);
   };
 
   return (
@@ -56,12 +105,12 @@ const StudentMarksDetails = () => {
         />
         <div className="flex flex-row gap-2 p-2 bg-gray-300 rounded-full w-fit justify-center items-center">
           <CgProfile /> login as
-          <span className="text-blue-600 font-bold">Nadeesha</span>
+          <span className="text-blue-600 font-bold">{username}</span>
         </div>
       </div>
       <div className="bg-white w-full rounded-lg p-5 flex flex-1 flex-col gap-5 overflow-auto">
         <div className="flex flex-row justify-between items-start lg:items-center">
-          <label className="font-bold text-5xl text-gray-500">
+          <label className="font-bold text-4xl lg:text-5xl text-gray-500">
             Student<span className="text-blue-700"> Marks</span>
           </label>
           <div className="flex flex-col lg:flex-row w-1/2 gap-5">
@@ -94,9 +143,14 @@ const StudentMarksDetails = () => {
                 }}
               />
             </div>
-            <div className="order-1 lg:order-3 bg-blue-700 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white">
+            <div
+              className="order-1 lg:order-3 bg-blue-700 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white"
+              onClick={() => {
+                openExportModel();
+              }}
+            >
               <BiExport />
-              <label className="truncate">export data</label>
+              export
             </div>
           </div>
         </div>
@@ -324,6 +378,55 @@ const StudentMarksDetails = () => {
           cancel
         </div>
       </div>
+      <Modal
+        isOpen={open}
+        onRequestClose={() => setOpen(false)}
+        contentLabel="Example Popup"
+        className="bg-white p-5 rounded-lg border-none focus:outline-none flex flex-col gap-5 justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black/80 flex justify-center items-center"
+      >
+        <label className="font-bold text-blue-600 text-xl">
+          Choose Export Format
+        </label>
+        <div className="flex flex-row gap-5">
+          <div
+            className="flex flex-row gap-2 justify-center items-center bg-blue-600 rounded-full p-2 text-white font-bold"
+            onClick={() => {
+              handleExportAsCsv();
+            }}
+          >
+            {loading01 ? (
+              <>
+                <LoadingUi />
+                exporting
+              </>
+            ) : (
+              <>
+                <BiExport />
+                expoert as csv
+              </>
+            )}
+          </div>
+          <div
+            className="flex flex-row gap-2 justify-center items-center bg-red-500 text-white rounded-full p-2 text-white font-bold"
+            onClick={() => {
+              handleExportAsPdf();
+            }}
+          >
+            {loading02 ? (
+              <>
+                <LoadingUi />
+                exporting
+              </>
+            ) : (
+              <>
+                <BiExport />
+                expoert as pdf
+              </>
+            )}
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
