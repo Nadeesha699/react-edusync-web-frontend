@@ -157,7 +157,7 @@ export default function VerifyOtp() {
         </div>
         <div className="flex flex-col justify-center items-center">
           <button
-            className="bg-blue-700 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white duration-300 ease-in hover:bg-blue-800 font-bold"
+            className="bg-gradient-to-r from-blue-700 to-blue-500 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white duration-300 ease-in hover:bg-blue-800 font-bold"
             type="submit"
           >
             {loading ? (

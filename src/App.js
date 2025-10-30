@@ -10,6 +10,7 @@ import Intro from "./pages/Intro";
 import { ToastContainer } from "react-toastify";
 import StudentsMarksView from "./pages/StudentMarksView";
 import StudentUpdate from "./pages/StudentUpdate";
+import NotFound from "./pages/NotFound";
 
 
 //tailwindcss add
@@ -32,6 +33,7 @@ function App() {
           <Route Component={ChangePassword} path="/change-password" />
           <Route Component={FindResult} path="/find-result" />
           <Route Component={StudentsMarksView} path="/student-marks" />
+          <Route Component={NotFound} path="*"/>
         </Routes>
         <ToastContainer />
       </BrowserRouter>

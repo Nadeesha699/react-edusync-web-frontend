@@ -156,7 +156,7 @@ const AddMarks = () => {
             <button
               disabled={loading}
               type="submit"
-              className="bg-blue-700  duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 md:w-1/4 text-white font-bold"
+              className="bg-gradient-to-r from-blue-700 to-blue-500  duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-1/2 md:w-1/4 text-white font-bold"
             >
               {loading ? (
                 <>

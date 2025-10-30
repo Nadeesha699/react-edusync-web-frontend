@@ -144,7 +144,7 @@ const StudentMarksDetails = () => {
               />
             </div>
             <div
-              className="order-1 lg:order-3 bg-blue-700 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white"
+              className="order-1 lg:order-3 bg-gradient-to-r from-blue-700 to-blue-500 font-bold duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full lg:w-1/2 text-white"
               onClick={() => {
                 openExportModel();
               }}

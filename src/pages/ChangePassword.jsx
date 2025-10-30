@@ -148,7 +148,7 @@ navigate("/login");
         </div>
         <div className="flex flex-col gap-5 justify-center items-center">
           <button
-            className="bg-blue-700 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white font-bold"
+            className="bg-gradient-to-r from-blue-700 to-blue-500 duration-300 ease-in hover:bg-blue-800 flex flex-row rounded-lg p-2 gap-2 items-center justify-center w-full text-white font-bold"
             type="submit"
           >
             {loading ? (
