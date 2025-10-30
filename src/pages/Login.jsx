@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LuEye, LuEyeOff, LuLock, LuLogIn, LuMail } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
-import logo from "../images/logo.png";
+import logo from "../images/logo01.png";
 import { toast } from "react-toastify";
 import { LoadingUi, LoginBackButton } from "../components/UiComponents";
 import { login } from "../Service/TeacherService";
@@ -45,7 +45,7 @@ export default function Login() {
         className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex justify-center items-center">
-          <img src={logo} alt="icon" className="w-1/2" />
+          <img src={logo} alt="icon" className="w-1/3" />
         </div>
         <div className="w-full flex justify-center items-center">
           <label className="font-bold text-gray-500 text-2xl text-center">

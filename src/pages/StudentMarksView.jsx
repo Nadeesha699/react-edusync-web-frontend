@@ -54,9 +54,9 @@ export default function StudentsMarksView() {
           <label className="font-bold">Logout</label>
         </div>
       </div>
-      <div className="lg:w-5/6 w-full bg-transparent ">
+      {/* <div className="lg:w-5/6 w-full bg-yellow-200 lg:pr-5 lg:pt-5 lg:pb-5 p-5"> */}
         <StudentMarksDetails />
-      </div>
+      {/* </div> */}
     </div>
   );
 }

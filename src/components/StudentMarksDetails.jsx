@@ -16,6 +16,7 @@ import logo from "../images/logo.png";
 import { FaPlus } from "react-icons/fa";
 import { deleteById, getAll } from "../Service/StudentMarksService";
 import { BatchData } from "../data/LocalData";
+import { CgProfile } from "react-icons/cg";
 
 const StudentMarksDetails = () => {
   const [searchTxt, setSearchTxt] = useState("");
@@ -35,24 +36,30 @@ const StudentMarksDetails = () => {
     try {
       const data = await getAll();
       setMarksData(data);
-      setLoadingScreen(false)
+      setLoadingScreen(false);
       setNotConnect(false);
     } catch (error) {
-      setLoadingScreen(false)
+      setLoadingScreen(false);
       setNotConnect(true);
     }
   };
 
   return (
-    <div className="w-full h-dvh lg:pr-5 lg:pt-5 lg:pb-5 p-5">
-      <div className="bg-white w-full h-full rounded-lg p-5 flex flex-col gap-5">
+    <div className="lg:w-5/6 w-full h-dvh bg-transparent flex flex-col gap-2 lg:pr-5 lg:pt-5 lg:pb-5 p-5">
+      <div className="bg-white w-full h-1/9 p-2 rounded-lg flex justify-between items-center lg:justify-end lg:items-end">
         <LuMenu
-          size={50}
+          size={30}
           className="text-blue-700 block lg:hidden"
           onClick={() => {
             setShowMenu(true);
           }}
         />
+        <div className="flex flex-row gap-2 p-2 bg-gray-300 rounded-full w-fit justify-center items-center">
+          <CgProfile /> login as
+          <span className="text-blue-600 font-bold">Nadeesha</span>
+        </div>
+      </div>
+      <div className="bg-white w-full rounded-lg p-5 flex flex-1 flex-col gap-5 overflow-auto">
         <div className="flex flex-row justify-between items-start lg:items-center">
           <label className="font-bold text-5xl text-gray-500">
             Student<span className="text-blue-700"> Marks</span>
@@ -63,10 +70,9 @@ const StudentMarksDetails = () => {
               <select
                 value={filterBatch}
                 onChange={(e) => {
-                  console.log(e.target.value);
                   setFilterBatch(e.target.value);
                 }}
-                className="w-full"
+                className="w-full bg-transparent focus:outline-none focus:ring-0"
               >
                 {BatchData.map((e, index) => {
                   return (
@@ -102,7 +108,7 @@ const StudentMarksDetails = () => {
           ) : marksData.length === 0 ? (
             <DataNotFound />
           ) : (
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 w-full">
               {marksData
                 .filter((m) => {
                   const searchValue =
@@ -265,7 +271,7 @@ const StudentMarksDetails = () => {
           showMenu ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <img src={logo} alt="icon" className="h-1/4 w-1/2" />
+        <img src={logo} alt="icon" className="w-full md:w-1/2" />
         <div
           className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
           onClick={() => {

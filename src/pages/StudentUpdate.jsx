@@ -3,7 +3,7 @@ import { LuCalculator, LuGraduationCap, LuIdCard, LuUser } from "react-icons/lu"
 import { MdClear, MdUpdate } from "react-icons/md";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BackButton, LoadingUi, ServerNotConnect } from "../components/UiComponents";
+import { BackButton, LoadingScreen, LoadingUi, ServerNotConnect } from "../components/UiComponents";
 import { getById, updateById } from "../Service/StudentMarksService";
 import { BatchData } from "../data/LocalData";
 
@@ -15,7 +15,8 @@ export default function StudentUpdate() {
   const [name, setName] = useState("");
   const [batch,setBatch] = useState("")
   const [loading, setLoading] = useState(false);
-  const [notConnect, setNotConnect] = useState(true);
+  const [notConnect, setNotConnect] = useState(false);
+  const [loadingScreen, setLoadingScreen] = useState(true);
 
 
   useEffect(() => {
@@ -30,9 +31,11 @@ export default function StudentUpdate() {
     setName(result.student_name);
     setMarks(result.marks);
     setBatch(result.batch);
+    setLoadingScreen(false)
   setNotConnect(false)
   }
     catch(error){
+      setLoadingScreen(false)
       setNotConnect(true)
     }
   }
@@ -58,7 +61,7 @@ export default function StudentUpdate() {
   return (
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
       <BackButton />
-      {notConnect?<ServerNotConnect/>:
+      {loadingScreen?<LoadingScreen/>: notConnect?<ServerNotConnect/>:
       <form
         onSubmit={updateMarks}
         className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"
@@ -106,7 +109,7 @@ export default function StudentUpdate() {
         </div>
           <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">
           <LuGraduationCap />
-          <select onChange={(e)=>{setBatch(e.target.value)}} value={batch} className="w-full">
+          <select onChange={(e)=>{setBatch(e.target.value)}} value={batch} className="w-full bg-transparent focus:outline-none focus:ring-0" required>
             {BatchData.map((e,index)=>{
               return(
              <option key={index} value={e.value}>{e.name}</option>)

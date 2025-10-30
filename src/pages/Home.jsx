@@ -4,9 +4,10 @@ import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import { MdPeople, MdLogout } from "react-icons/md";
 import AddMarks from "../components/AddMarks";
+import { CgProfile } from "react-icons/cg";
 
 const Home = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
   return (
@@ -54,9 +55,7 @@ const Home = () => {
           <label className="font-bold">Logout</label>
         </div>
       </div>
-      <div className="lg:w-5/6 w-full bg-transparent ">
         <AddMarks />
-      </div>
     </div>
   );
 };

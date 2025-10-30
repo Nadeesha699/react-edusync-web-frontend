@@ -15,6 +15,7 @@ export default function FindResult() {
   const [indexs, setIndexs] = useState("");
   const [name, setName] = useState("");
   const [marks, setMarks] = useState("");
+  const [batch,setBatch] = useState("")
   const [issuedDate, setIssuedDate] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [noResult, setNoResult] = useState(false);
@@ -35,6 +36,7 @@ export default function FindResult() {
         setName(result.student_name);
         setMarks(result.marks);
         setIndexs(result.student_index);
+        setBatch(result.batch)
         setShowResult(true);
         setNoResult(false);
       }
@@ -47,32 +49,6 @@ export default function FindResult() {
         setLoading(false);
       }, 500);
     }
-    // axios
-    //   .get(`${appUrl}/studentmarks/get-by-index/${index}`)
-    //   .then((e) => {
-    //     setNotConnect(false);
-    //     if (e.data === null) {
-    //       setShowResult(false);
-    //       setNoResult(true);
-    //     } else {
-    //       setIssuedDate(formatDate(e.data.updated_at));
-    //       setName(e.data.student_name);
-    //       setMarks(e.data.marks);
-    //       setIndexs(e.data.student_index);
-    //       setShowResult(true);
-    //       setNoResult(false);
-    //     }
-    //   })
-    //   .catch(() => {
-    //     setShowResult(false);
-    //     setNoResult(false);
-    //     setNotConnect(true);
-    //   })
-    //   .finally(() => {
-    //     setTimeout(() => {
-    //       setLoading(false);
-    //     }, 500);
-    //   });
   };
 
   return (
@@ -112,7 +88,7 @@ export default function FindResult() {
               {loading ? (
                 <>
                   <LoadingUi />
-                  Searching…
+                  checking…
                 </>
               ) : (
                 <>
@@ -129,6 +105,7 @@ export default function FindResult() {
             indexs={indexs}
             name={name}
             issuedDate={issuedDate}
+            batch={batch}
           />
         ) : (
           ""

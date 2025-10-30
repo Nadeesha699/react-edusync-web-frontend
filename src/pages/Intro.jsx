@@ -8,13 +8,13 @@ export default function Intro() {
   return (
     <div className="w-full h-full lg:h-dvh flex flex-col lg:flex-row justify-center items-center bg-white">
       <div className="w-full lg:w-1/2 h-full p-10 gap-10 flex flex-col justify-between items-center lg:items-start">
-        <div className="flex lg:flex-row flex-col lg:justify-start justify-center items-center">
+        {/* <div className="flex lg:flex-row flex-col lg:justify-start justify-center items-center"> */}
           <img
             src={logo}
             alt="icon"
-            className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 h-auto"
+            className="w-full md:w-1/2"
           />
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <label className="font-bold text-3xl lg:text-5xl text-gray-400 text-center lg:text-left">
               EduSync ICT
             </label>
@@ -22,7 +22,7 @@ export default function Intro() {
               Empowering Students and Teachers with Smart ICT Results Access.
             </label>
           </div>
-        </div>
+        </div> */}
         <img
           src={IntroImage}
           alt="icon"
