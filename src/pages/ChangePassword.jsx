@@ -19,19 +19,18 @@ export default function ChangePassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const loadData = async () => {
+      try {
+        const id = atob(searchParams.get("id"));
+        const result = await getById({ id });
+
+        setEmail(result.email);
+        setName(result.name);
+        setPhoneNumber(result.phone_number);
+      } catch (error) {}
+    };
     loadData();
-  });
-
-  const loadData = async () => {
-    try {
-      const id = atob(searchParams.get("id"));
-      const result = await getById({ id });
-
-      setEmail(result.email);
-      setName(result.name);
-      setPhoneNumber(result.phone_number);
-    } catch (error) {}
-  };
+  }, [searchParams]);
 
   const changePassword = async (e) => {
     setLoading(true);
@@ -48,7 +47,6 @@ export default function ChangePassword() {
         setLoading(false);
       }, 500);
     }
-
   };
 
   return (

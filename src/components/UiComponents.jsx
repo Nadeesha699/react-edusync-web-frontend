@@ -230,12 +230,14 @@ export const StudentWebCard = ({
 
 export const LoadingScreen = () => {
   return (
-  <div className="flex flex-col items-center justify-center h-full">
-  <div className="relative w-16 h-16">
-    <div className="absolute inset-0 border-4 border-blue-500 rounded-full animate-ping"></div>
-    <div className="absolute inset-0 border-4 border-blue-300 rounded-full animate-spin border-t-transparent"></div>
-  </div>
-  <p className="mt-6 text-xl font-bold text-blue-500 tracking-wide">Please wait...</p>
-</div>
+    <div className="flex flex-col items-center justify-center h-full">
+      <div className="relative w-16 h-16">
+        <div className="absolute inset-0 border-4 border-blue-500 rounded-full animate-ping"></div>
+        <div className="absolute inset-0 border-4 border-blue-300 rounded-full animate-spin border-t-transparent"></div>
+      </div>
+      <p className="mt-6 text-xl font-bold text-blue-500 tracking-wide">
+        Please wait...
+      </p>
+    </div>
   );
 };

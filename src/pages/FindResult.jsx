@@ -15,7 +15,7 @@ export default function FindResult() {
   const [indexs, setIndexs] = useState("");
   const [name, setName] = useState("");
   const [marks, setMarks] = useState("");
-  const [batch,setBatch] = useState("")
+  const [batch, setBatch] = useState("");
   const [issuedDate, setIssuedDate] = useState("");
   const [showResult, setShowResult] = useState(false);
   const [noResult, setNoResult] = useState(false);
@@ -36,7 +36,7 @@ export default function FindResult() {
         setName(result.student_name);
         setMarks(result.marks);
         setIndexs(result.student_index);
-        setBatch(result.batch)
+        setBatch(result.batch);
         setShowResult(true);
         setNoResult(false);
       }

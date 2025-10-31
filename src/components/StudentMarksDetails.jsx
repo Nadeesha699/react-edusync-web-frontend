@@ -18,10 +18,8 @@ import { FaPlus } from "react-icons/fa";
 import { deleteById, getAll } from "../Service/StudentMarksService";
 import { BatchData } from "../data/LocalData";
 import { CgProfile } from "react-icons/cg";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import Modal from "react-modal";
-import { exportAsCsv, exportAsPdf, setGrade } from "../utils/utils";
+import { exportAsCsv, exportAsPdf } from "../utils/utils";
 import { getById } from "../Service/TeacherService";
 
 Modal.setAppElement("#root");
@@ -41,19 +39,19 @@ const StudentMarksDetails = () => {
   const [username, setUserName] = useState("loading...");
 
   useEffect(() => {
+    const handelSetUserName = async () => {
+      try {
+        const id = atob(searchParams.get("user_id"));
+        const result = await getById({ id });
+        setUserName(result.name);
+      } catch (error) {
+        setUserName("N/A");
+      }
+    };
+
     handleGetAll();
     handelSetUserName();
-  }, []);
-
-  const handelSetUserName = async () => {
-    try {
-      const id = atob(searchParams.get("user_id"));
-      const result = await getById({ id });
-      setUserName(result.name);
-    } catch (error) {
-      setUserName("N/A");
-    }
-  };
+  }, [searchParams]);
 
   const handleGetAll = async () => {
     try {

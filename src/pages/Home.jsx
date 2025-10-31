@@ -4,7 +4,6 @@ import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import { MdPeople, MdLogout } from "react-icons/md";
 import AddMarks from "../components/AddMarks";
-import { CgProfile } from "react-icons/cg";
 
 const Home = () => {
   const [searchParams] = useSearchParams();
