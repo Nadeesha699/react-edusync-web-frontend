@@ -16,9 +16,6 @@ export default function Intro() {
           className="w-full h-full lg:w-1/2 md:w-1/3 sm:w-1/3 flex lg:hidden block rounded-full h-auto"
         />
         <div className="flex flex-col gap-5 justify-center items-center lg:items-start">
-          {/* <label className="inline-block bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-700 text-transparent bg-clip-text text-5xl lg:text-7xl font-bold ">
-            &lt;Welcome/&gt;
-          </label> */}
           <Typewriter
             options={{
               strings: [
@@ -29,7 +26,6 @@ export default function Intro() {
               loop: true,
             }}
           />
-
           <label className="text-gray-400 text-sm mt-1 text-center lg:text-left">
             Check student results, manage grades, and view academic performance
             anytime, anywhere.
