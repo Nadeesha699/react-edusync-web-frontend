@@ -58,6 +58,7 @@ export default function Intro() {
               href="https://nadeesha699.github.io/nadeesha-ruwandima/"
               className="text-blue-700 font-bold ease-in hover:text-blue-800"
             >
+              {" "}
               Nadeesha Ruwandima
             </a>
           </label>

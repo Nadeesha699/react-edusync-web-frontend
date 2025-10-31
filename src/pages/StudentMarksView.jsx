@@ -10,7 +10,7 @@ export default function StudentsMarksView() {
   const [searchParams] = useSearchParams();
 
   return (
-    <div className="flex flex-row h-dvh bg-zinc-300">
+    <div className="flex flex-row h-dvh bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
       <div className="w-1/6 flex flex-col justify-start pt-5 pb-5 pl-5 bg-white rounded-r-2xl hidden lg:block">
         <img src={logo} alt="icon" className="w-full pb-5" />
         <div

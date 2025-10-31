@@ -46,7 +46,7 @@ export default function SendOtp() {
     }
   }
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
+    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
       <BackButton />
       <form
         onSubmit={(e) => {

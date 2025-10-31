@@ -49,34 +49,10 @@ export default function ChangePassword() {
       }, 500);
     }
 
-    //   axios
-    // .put(
-    //   `${appUrl}/teachers/update-by-id/${atob(
-    //     searchParams.get("id")
-    //   )}`,
-    //   {
-    //     name: name,
-    //     phone_number: phoneNumber,
-    //     email: email,
-    //     password: confirmPassword,
-    //   }
-    // )
-    // .then(() => {
-    //   navigate("/login");
-    //   toast.success("Success! Your password has been updated ✅");
-    // })
-    // .catch(() => {
-    //   toast.error("Server connection issue. Please try again in a moment.");
-    // })
-    // .finally(() => {
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //   }, 500);
-    // });
   };
 
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-zinc-300">
+    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
       <BackButton />
       <form
         onSubmit={(e) => {
