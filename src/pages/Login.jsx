@@ -36,13 +36,13 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
+    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
       <LoginBackButton />
       <form
         onSubmit={(e) => {
           handleLogin(e);
         }}
-        className="bg-white lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
+        className="bg-white lg:w-1/3 xl:w-1/4 w-full rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex justify-center items-center">
           <img src={logo} alt="icon" className="w-1/3" />
@@ -105,7 +105,7 @@ export default function Login() {
             ) : (
               <>
                 <LuLogIn />
-                sign up
+                sign in
               </>
             )}
           </button>

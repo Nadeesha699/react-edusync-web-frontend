@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const NotFound = () => {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center gap-5 p-5">
+    <div className="w-full h-dvh flex flex-col justify-center items-center gap-5 p-5 bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
       <label className="text-8xl inline-block bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-700 text-transparent bg-clip-text font-bold">
         Oops!
       </label>

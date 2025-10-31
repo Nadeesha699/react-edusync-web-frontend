@@ -52,7 +52,7 @@ export default function FindResult() {
   };
 
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
+    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
       <BackButton />
       <div className="flex flex-col gap-5 lg:w-1/3 sm:w-1/2">
         <form

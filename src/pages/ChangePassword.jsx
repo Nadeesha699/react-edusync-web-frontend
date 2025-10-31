@@ -50,7 +50,7 @@ export default function ChangePassword() {
   };
 
   return (
-    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-r from-blue-900 via-cyan-500 to-blue-900">
+    <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
       <BackButton />
       <form
         onSubmit={(e) => {

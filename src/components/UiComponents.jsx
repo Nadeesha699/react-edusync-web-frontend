@@ -8,7 +8,7 @@ export const BackButton = () => {
   return (
     <BiArrowBack
       size={30}
-      className="fixed lg:top-10 lg:left-10 top-5 left-5 text-white"
+      className="fixed lg:top-10 lg:left-10 top-5 left-5"
       onClick={() => {
         navigate(-1);
       }}
@@ -21,7 +21,7 @@ export const LoginBackButton = () => {
   return (
     <BiArrowBack
       size={30}
-      className="fixed lg:top-10 lg:left-10 top-5 left-5 text-white"
+      className="fixed lg:top-10 lg:left-10 top-5 left-5"
       onClick={() => {
         navigate("/");
       }}
