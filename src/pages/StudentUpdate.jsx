@@ -45,8 +45,14 @@ export default function StudentUpdate() {
   }, [searchParams]);
 
   useEffect(() => {
+    const checkUser = () => {
+      if (searchParams.get("mark-id") === null) {
+        navigate("*");
+      }
+    };
+    checkUser();
     handleGetById();
-  }, [handleGetById]);
+  }, [handleGetById, navigate, searchParams]);
 
   async function updateMarks(e) {
     setLoading(true);

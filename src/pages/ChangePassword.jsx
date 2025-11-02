@@ -19,6 +19,12 @@ export default function ChangePassword() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const checkUser = () => {
+      if (searchParams.get("id") === null) {
+        navigate("");
+      }
+    };
+
     const loadData = async () => {
       try {
         const id = atob(searchParams.get("id"));
@@ -27,10 +33,13 @@ export default function ChangePassword() {
         setEmail(result.email);
         setName(result.name);
         setPhoneNumber(result.phone_number);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error.message);
+      }
     };
+    checkUser();
     loadData();
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   const changePassword = async (e) => {
     setLoading(true);

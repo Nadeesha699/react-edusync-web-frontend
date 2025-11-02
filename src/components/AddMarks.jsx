@@ -54,18 +54,24 @@ const AddMarks = () => {
   };
 
   useEffect(() => {
-    handelSetUserName();
-  }, []);
+    const checkUser = () => {
+      if (searchParams.get("user_id") === null) {
+        navigate("*");
+      }
+    };
 
-  const handelSetUserName = async () => {
-    try {
-      const id = atob(searchParams.get("user_id"));
-      const result = await getById({ id });
-      setUserName(result.name);
-    } catch (error) {
-      setUserName("N/A");
-    }
-  };
+    const handelSetUserName = async () => {
+      try {
+        const id = atob(searchParams.get("user_id"));
+        const result = await getById({ id });
+        setUserName(result.name);
+      } catch (error) {
+        setUserName("N/A");
+      }
+    };
+    checkUser();
+    handelSetUserName();
+  }, [navigate, searchParams]);
 
   return (
     <div className="w-full flex flex-col gap-2 lg:w-5/6 w-full bg-transparent lg:pr-5 lg:pt-5 lg:pb-5 p-5">

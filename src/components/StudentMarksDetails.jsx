@@ -39,19 +39,26 @@ const StudentMarksDetails = () => {
   const [username, setUserName] = useState("loading...");
 
   useEffect(() => {
+    const checkUser = () => {
+      if (searchParams.get("user_id") === null) {
+        navigate("*");
+      }
+    };
+
     const handelSetUserName = async () => {
       try {
         const id = atob(searchParams.get("user_id"));
         const result = await getById({ id });
         setUserName(result.name);
       } catch (error) {
-        setUserName("N/A");
+        navigate("N/A");
       }
     };
 
+    checkUser();
     handleGetAll();
     handelSetUserName();
-  }, [searchParams]);
+  }, [searchParams, navigate]);
 
   const handleGetAll = async () => {
     try {
