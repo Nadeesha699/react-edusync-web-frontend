@@ -21,7 +21,6 @@ export default function Login() {
       toast.success("Login successful! Welcome back 👋");
       sessionStorage.setItem("token",result.token)
       navigate("/home")
-      // navigate(`/home?user_id=${btoa(result.user_id)}`);
     } catch (error) {
       if (error.response?.status === 401) {
         toast.error(
