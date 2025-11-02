@@ -16,7 +16,8 @@ const Home = () => {
         <div
           className="bg-blue-700  text-white rounded-l-2xl hover:bg-blue-800 p-5 w-full  flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
-            navigate(`/home?user_id=${searchParams.get("user_id")}`);
+            // navigate(`/home?user_id=${searchParams.get("user_id")}`);
+            navigate(`/home`);
           }}
         >
           <FaPlus />
@@ -25,7 +26,8 @@ const Home = () => {
         <div
           className=" rounded-l-2xl hover:bg-blue-100 p-5 w-full flex flex-row justify-start items-center gap-4 duration-300 ease-in cursor-pointer"
           onClick={() => {
-            navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
+            // navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
+            navigate(`/student-marks`);
           }}
         >
           <MdPeople />

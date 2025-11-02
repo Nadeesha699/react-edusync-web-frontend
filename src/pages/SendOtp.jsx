@@ -18,13 +18,7 @@ export default function SendOtp() {
       const result = await verifyEmail({ email });
       if (result) {
         try {
-          const result01 = await sendOtp({ email });
-          const otpData = {
-            value: result01.otp,
-            expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-            // expiry: Date.now() + 10 * 1000,
-          };
-          sessionStorage.setItem("otp", JSON.stringify(otpData));
+          await sendOtp({ email });
           toast.success(`OTP has been sent successfully to ${email}`);
           navigate(`/verify-otp?email=${btoa(email)}&id=${btoa(result.id)}`);
         } catch (error) {

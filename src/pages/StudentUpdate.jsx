@@ -39,6 +39,11 @@ export default function StudentUpdate() {
       setLoadingScreen(false);
       setNotConnect(false);
     } catch (error) {
+      if (error.response?.status === 403) {
+        toast.error("Your session has expired. Please log in again.");
+        sessionStorage.removeItem("token");
+        navigate("/login");
+      }
       setLoadingScreen(false);
       setNotConnect(true);
     }
@@ -46,8 +51,8 @@ export default function StudentUpdate() {
 
   useEffect(() => {
     const checkUser = () => {
-      if (searchParams.get("mark-id") === null) {
-        navigate("*");
+      if (!sessionStorage.getItem("token")) {
+        navigate("/");
       }
     };
     checkUser();
@@ -63,6 +68,11 @@ export default function StudentUpdate() {
       await updateById({ id, index, name, marks, batch });
       toast.success("Student updated successfully!");
     } catch (error) {
+      if (error.response?.status === 403) {
+        toast.error("Your session has expired. Please log in again.");
+        sessionStorage.removeItem("token");
+        navigate("/login");
+      }
       toast.error("Server connection issue. Please try again in a moment.");
     } finally {
       setTimeout(() => {

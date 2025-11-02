@@ -21,7 +21,7 @@ export default function ChangePassword() {
   useEffect(() => {
     const checkUser = () => {
       if (searchParams.get("id") === null) {
-        navigate("");
+        navigate("*");
       }
     };
 

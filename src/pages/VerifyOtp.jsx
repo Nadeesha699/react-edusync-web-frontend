@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { LuBadgeCheck } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BackButton, LoadingUi } from "../components/UiComponents";
-import { sendOtp } from "../Service/TeacherService";
+import { sendOtp, verifyOtp } from "../Service/TeacherService";
 
 export default function VerifyOtp() {
   const navigate = useNavigate();
@@ -16,52 +16,36 @@ export default function VerifyOtp() {
   const [searchParams] = useSearchParams();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log(sessionStorage.getItem("otp"));
-  }, []);
-
-  const verifyOtp = (e) => {
+  const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const storedOtp = sessionStorage.getItem("otp");
-    const parseOtp = JSON.parse(storedOtp);
-    if (parseOtp) {
-      if (parseOtp.expiry > Date.now()) {
-        console.log(parseOtp.value);
-        console.log(n1 + n2 + n3 + n4 + n5 + n6);
-        if (parseOtp.value.toString() === `${n1}${n2}${n3}${n4}${n5}${n6}`) {
-          sessionStorage.clear();
-          navigate(`/change-password?id=${searchParams.get("id")}`);
-        } else {
-          toast.error(
-            "Oops! The OTP you entered doesn’t match. Please try again."
-          );
-        }
-      } else {
-        toast.error("This OTP has expired. Please request a new one.");
-      }
-    } else {
-      toast.error("Server connection issue. Please try again in a moment.");
-    }
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
+    const email = atob(searchParams.get("email"));
+    const otp = `${n1}${n2}${n3}${n4}${n5}${n6}`;
+
+    try {
+      await verifyOtp({ email, otp });
+      navigate(`/change-password?id=${searchParams.get("id")}`);
+    } catch (error) {
+      if (error.response?.status === 400) {
+        toast.error(error.response?.data.message);
+      } else if (error.response?.status === 500) {
+        toast.error("Server connection issue. Please try again in a moment.");
+      }
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
   };
 
   const resendOtp = async () => {
     try {
       const email = atob(searchParams.get("email"));
-      const result = await sendOtp({ email });
-      const otpData = {
-        value: result.otp,
-        expiry: Date.now() + 5 * 60 * 1000, // 5 minutes from now
-      };
-      sessionStorage.setItem("otp", JSON.stringify(otpData));
-      window.location.reload();
+      await sendOtp({ email });
+      toast.success(`OTP has been sent successfully to ${email}`);
     } catch (error) {
       toast.error("Server connection issue. Please try again in a moment.");
-      sessionStorage.removeItem("otp");
     }
   };
 
@@ -69,7 +53,7 @@ export default function VerifyOtp() {
     <div className="w-full h-dvh flex flex-col justify-center items-center p-5 bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
       <BackButton />
       <form
-        onSubmit={verifyOtp}
+        onSubmit={handleVerifyOtp}
         className="bg-white  lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center text-center">

@@ -20,7 +20,8 @@ import { BatchData } from "../data/LocalData";
 import { CgProfile } from "react-icons/cg";
 import Modal from "react-modal";
 import { exportAsCsv, exportAsPdf } from "../utils/utils";
-import { getById } from "../Service/TeacherService";
+import { decodeToken, getById } from "../Service/TeacherService";
+import { toast } from "react-toastify";
 
 Modal.setAppElement("#root");
 
@@ -40,14 +41,15 @@ const StudentMarksDetails = () => {
 
   useEffect(() => {
     const checkUser = () => {
-      if (searchParams.get("user_id") === null) {
-        navigate("*");
+      if (!sessionStorage.getItem("token")) {
+        navigate("/");
       }
     };
 
     const handelSetUserName = async () => {
       try {
-        const id = atob(searchParams.get("user_id"));
+        // const id = atob(searchParams.get("user_id"));
+        const id = await decodeToken();
         const result = await getById({ id });
         setUserName(result.name);
       } catch (error) {
@@ -67,6 +69,11 @@ const StudentMarksDetails = () => {
       setLoadingScreen(false);
       setNotConnect(false);
     } catch (error) {
+      if (error.response?.status === 403) {
+        toast.error("Your session has expired. Please log in again.");
+        sessionStorage.removeItem("token");
+        navigate("/login");
+      }
       setLoadingScreen(false);
       setNotConnect(true);
     }
@@ -335,7 +342,7 @@ const StudentMarksDetails = () => {
           className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
           onClick={() => {
             setShowMenu(false);
-            navigate(`/home?user_id=${searchParams.get("user_id")}`);
+            navigate(`/home`);
           }}
         >
           <FaPlus />
@@ -345,7 +352,7 @@ const StudentMarksDetails = () => {
           className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
           onClick={() => {
             setShowMenu(false);
-            navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
+            navigate(`/student-marks`);
           }}
         >
           <MdPeople />

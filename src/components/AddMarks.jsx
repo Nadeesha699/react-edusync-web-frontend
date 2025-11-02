@@ -17,7 +17,7 @@ import { save } from "../Service/StudentMarksService";
 import { toast } from "react-toastify";
 import { BatchData } from "../data/LocalData";
 import { CgProfile } from "react-icons/cg";
-import { getById } from "../Service/TeacherService";
+import { decodeToken, getById } from "../Service/TeacherService";
 
 const AddMarks = () => {
   const [loading, setLoading] = useState(false);
@@ -43,6 +43,10 @@ const AddMarks = () => {
     } catch (error) {
       if (error.response?.status === 409) {
         toast.error("Oops! Marks for this student are already recorded.");
+      } else if (error.response?.status === 403) {
+        toast.error("Your session has expired. Please log in again.");
+        sessionStorage.removeItem("token");
+        navigate("/login");
       } else {
         toast.error("Server connection issue. Please try again in a moment.");
       }
@@ -55,14 +59,15 @@ const AddMarks = () => {
 
   useEffect(() => {
     const checkUser = () => {
-      if (searchParams.get("user_id") === null) {
-        navigate("*");
+      if (!sessionStorage.getItem("token")) {
+        navigate("/");
       }
     };
 
     const handelSetUserName = async () => {
       try {
-        const id = atob(searchParams.get("user_id"));
+        // const id = atob(searchParams.get("user_id"));
+        const id = await decodeToken();
         const result = await getById({ id });
         setUserName(result.name);
       } catch (error) {
@@ -195,7 +200,7 @@ const AddMarks = () => {
             className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
             onClick={() => {
               setShowMenu(false);
-              navigate(`/home?user_id=${searchParams.get("user_id")}`);
+              navigate(`/home`);
             }}
           >
             <FaPlus />
@@ -205,7 +210,7 @@ const AddMarks = () => {
             className="duration-300 ease-in cursor-pointer flex flex-row gap-2 justify-left items-center w-full font-bold"
             onClick={() => {
               setShowMenu(false);
-              navigate(`/student-marks?user_id=${searchParams.get("user_id")}`);
+              navigate(`/student-marks`);
             }}
           >
             <MdPeople />
