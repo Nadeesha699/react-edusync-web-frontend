@@ -61,7 +61,7 @@ export default function FindResult() {
           className="bg-white w-full rounded-lg p-5 flex flex-col gap-5"
         >
           <div className="w-full flex flex-col gap-2 justify-center items-center">
-            <label className="font-bold text-gray-500 text-5xl text-center">
+            <label className="font-bold text-gray-500 text-4xl lg:text-5xl text-center">
               ICT<span className="text-blue-700"> Results</span>{" "}
             </label>
             <label className="text-gray-400 text-sm text-center">

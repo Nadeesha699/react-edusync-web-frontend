@@ -57,7 +57,7 @@ export default function VerifyOtp() {
         className="bg-white  lg:w-1/3 xl:w-1/4 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex flex-col gap-2 justify-center items-center text-center">
-          <label className="font-bold text-gray-500 text-5xl">
+          <label className="font-bold text-gray-500 text-4xl lg:text-5xl">
             Verify<span className="text-blue-700"> OTP</span>{" "}
           </label>
           <label className="text-gray-400 text-sm mt-1 text-center">

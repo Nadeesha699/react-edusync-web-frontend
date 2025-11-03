@@ -23,7 +23,7 @@ const TermaAndConditions = () => {
           not use this website.
         </p>
 
-        <label class="text-xl font-bold">2. Changes to Terms</label>
+        <label className="text-xl font-bold">2. Changes to Terms</label>
         <p className="text-gray-500">
           EduSync ICT reserves the right to revise these terms and conditions at
           any time without prior notice. Updated terms will be posted on this
@@ -37,26 +37,26 @@ const TermaAndConditions = () => {
           distribution is strictly prohibited.
         </p>
 
-        <label class="text-xl font-bold">4. Use of Services</label>
+        <label className="text-xl font-bold">4. Use of Services</label>
         <p className="text-gray-500">
           You agree to use our services only for lawful purposes and not to
           engage in activities that may harm our reputation or disrupt
           operations.
         </p>
 
-        <label class="text-xl font-bold">5. Limitation of Liability</label>
+        <label className="text-xl font-bold">5. Limitation of Liability</label>
         <p className="text-gray-500">
           EduSync ICT is not liable for any damages, direct or indirect, arising
           from the use or inability to use our services or website content.
         </p>
 
-        <label class="text-xl font-bold">6. Privacy</label>
+        <label className="text-xl font-bold">6. Privacy</label>
         <p className="text-gray-500">
           Your privacy is important to us. Please refer to our Privacy Policy to
           understand how we collect, use, and protect your information.
         </p>
 
-        <label class="text-xl font-bold">7. Contact Information</label>
+        <label className="text-xl font-bold">7. Contact Information</label>
         <p className="text-gray-500">
           For any questions about these Terms and Conditions, please contact us
           at:
@@ -75,7 +75,7 @@ const TermaAndConditions = () => {
           </div>
         </div>
 
-        <p class="text-gray-600 italic">Last updated: November 2025</p>
+        <p className="text-gray-600 italic">Last updated: November 2025</p>
       </div>
     </div>
   );

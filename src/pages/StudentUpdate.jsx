@@ -94,7 +94,7 @@ export default function StudentUpdate() {
           onSubmit={updateMarks}
           className="bg-white lg:w-1/2 rounded-lg p-5 flex flex-col gap-5"
         >
-          <label className="font-bold text-gray-500 text-5xl text-center">
+          <label className="font-bold text-gray-500 text-4xl lg:text-5xl text-center">
             Update<span className="text-blue-700"> Student</span>{" "}
           </label>
           <div className="ring-blue-700 ring-1 p-2 flex flex-row items-center justify-start gap-2 rounded-lg">

@@ -61,7 +61,7 @@ export default function ChangePassword() {
         className="bg-white lg:w-1/3 rounded-lg p-5 flex flex-col gap-5"
       >
         <div className="w-full flex  flex-col gap-2 justify-center items-center text-center">
-          <label className="font-bold text-gray-500 text-5xl">
+          <label className="font-bold text-gray-500 text-4xl lg:text-5xl">
             Change<span className="text-blue-700"> Password</span>{" "}
           </label>
           <p className="text-gray-400 text-sm mt-1">
