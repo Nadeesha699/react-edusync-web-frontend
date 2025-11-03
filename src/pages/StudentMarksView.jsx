@@ -44,6 +44,7 @@ export default function StudentsMarksView() {
               cancelButtonColor: "#7590dcff",
             }).then((e) => {
               if (e.isConfirmed) {
+                sessionStorage.removeItem("token");
                 navigate("/login");
               }
             });
