@@ -78,7 +78,6 @@ export async function getByIndex({ index }) {
 
 export async function deleteById({ id }) {
   try {
-    console.log(id)
     await axios.delete(`${appUrl}/studentmarks/delete-by-id/${id}`, {
       headers: { Authorization: sessionStorage.getItem("token") },
     });
