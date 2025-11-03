@@ -11,10 +11,8 @@ import { ToastContainer } from "react-toastify";
 import StudentsMarksView from "./pages/StudentMarksView";
 import StudentUpdate from "./pages/StudentUpdate";
 import NotFound from "./pages/NotFound";
+import TermaAndConditions from "./pages/TermsAndConditions";
 
-
-//tailwindcss add
-// https://v3.tailwindcss.com/docs/guides/create-react-app
 
 //tailwindcss resources
 // https://tailwindcss.com/docs
@@ -33,6 +31,7 @@ function App() {
           <Route Component={ChangePassword} path="/change-password" />
           <Route Component={FindResult} path="/find-result" />
           <Route Component={StudentsMarksView} path="/student-marks" />
+          <Route Component={TermaAndConditions} path="/terms-conditions"/>
           <Route Component={NotFound} path="*"/>
         </Routes>
         <ToastContainer />

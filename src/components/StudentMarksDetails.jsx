@@ -1,5 +1,5 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { BiExport, BiTrash } from "react-icons/bi";
 import { LuFilter, LuMenu, LuSearch } from "react-icons/lu";
 import { MdClear, MdUpdate, MdPeople, MdLogout } from "react-icons/md";
@@ -39,30 +39,7 @@ const StudentMarksDetails = () => {
   const [open, setOpen] = useState(false);
   const [username, setUserName] = useState("loading...");
 
-  useEffect(() => {
-    const checkUser = () => {
-      if (!sessionStorage.getItem("token")) {
-        navigate("/");
-      }
-    };
-
-    const handelSetUserName = async () => {
-      try {
-        // const id = atob(searchParams.get("user_id"));
-        const id = await decodeToken();
-        const result = await getById({ id });
-        setUserName(result.name);
-      } catch (error) {
-        navigate("N/A");
-      }
-    };
-
-    checkUser();
-    handleGetAll();
-    handelSetUserName();
-  }, [searchParams, navigate]);
-
-  const handleGetAll = async () => {
+   const handleGetAll = useCallback( async () => {
     try {
       const data = await getAll();
       setMarksData(data);
@@ -77,7 +54,31 @@ const StudentMarksDetails = () => {
       setLoadingScreen(false);
       setNotConnect(true);
     }
-  };
+  },[navigate])
+
+  useEffect(() => {
+    const checkUser = () => {
+      if (!sessionStorage.getItem("token")) {
+        navigate("/");
+      }
+    };
+
+    const handelSetUserName = async () => {
+      try {
+        const id = await decodeToken();
+        const result = await getById({ id });
+        setUserName(result.name);
+      } catch (error) {
+        navigate("N/A");
+      }
+    };
+
+    checkUser();
+    handleGetAll();
+    handelSetUserName();
+  }, [searchParams, navigate, handleGetAll]);
+
+ 
 
   const handleExportAsCsv = async () => {
     setLoading01(true);

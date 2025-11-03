@@ -66,7 +66,6 @@ const AddMarks = () => {
 
     const handelSetUserName = async () => {
       try {
-        // const id = atob(searchParams.get("user_id"));
         const id = await decodeToken();
         const result = await getById({ id });
         setUserName(result.name);

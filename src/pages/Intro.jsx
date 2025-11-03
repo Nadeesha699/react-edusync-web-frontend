@@ -3,6 +3,7 @@ import IntroImage from "../images/intro.jpg";
 import logo from "../images/logo.png";
 import { FaArrowRight } from "react-icons/fa6";
 import Typewriter from "typewriter-effect";
+import { PageFooter } from "../components/UiComponents";
 
 export default function Intro() {
   const navigate = useNavigate();
@@ -51,18 +52,7 @@ export default function Intro() {
             </div>
           </div>
         </div>
-        <div className="w-full text-center">
-          <label className="text-gray-400">
-            © 2025 EduSync ICT | Developed by
-            <a
-              href="https://nadeesha699.github.io/nadeesha-ruwandima/"
-              className="text-blue-700 font-bold ease-in hover:text-blue-800"
-            >
-              {" "}
-              Nadeesha Ruwandima
-            </a>
-          </label>
-        </div>
+      <PageFooter color="text-gray-400"/>
       </div>
       <img
         src={IntroImage}

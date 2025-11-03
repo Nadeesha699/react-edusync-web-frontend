@@ -47,7 +47,7 @@ export default function StudentUpdate() {
       setLoadingScreen(false);
       setNotConnect(true);
     }
-  }, [searchParams]);
+  }, [searchParams,navigate]);
 
   useEffect(() => {
     const checkUser = () => {

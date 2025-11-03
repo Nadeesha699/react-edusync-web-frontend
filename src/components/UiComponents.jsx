@@ -1,5 +1,5 @@
 import { BiArrowBack } from "react-icons/bi";
-import { LuFileX } from "react-icons/lu";
+import { LuFileX, LuMail, LuScale } from "react-icons/lu";
 import { MdClear } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
@@ -238,6 +238,46 @@ export const LoadingScreen = () => {
       <p className="mt-6 text-xl font-bold text-blue-500 tracking-wide">
         Please wait...
       </p>
+    </div>
+  );
+};
+
+export const PageFooter = ({color}) => {
+  return (
+    <div className="w-full text-center text-sm">
+      <label className={color}>
+        © 2025 EduSync ICT | Developed by
+        <a
+          href="https://nadeesha699.github.io/nadeesha-ruwandima/"
+          className="text-blue-700 font-bold ease-in hover:text-blue-800"
+        >
+          {" "}
+          Nadeesha Ruwandima
+        </a>
+      </label>
+    </div>
+  );
+};
+
+export const StudentFooter = () => {
+  const navigate = useNavigate();
+  return (
+    <div className="bg-gradient-to-br from-gray-500 via-blue-500 to-cyan-500 w-full rounded-b-lg p-5 flex flex-col gap-2 text-white text-sm">
+      <a
+        href="mailto:nadeesharuwandima@gmail.com?subject=EduSync%20ICT%20Inquiry&body=Hello%20EduSync%20Team,%0D%0A%0D%0AI%20would%20like%20to%20know%20more%20about%20your%20ICT%20services.%0D%0A%0D%0AThank%20you!"
+        className="flex flex-row gap-2 justify-center items-center duration-300 ease-in hover:text-blue-800"
+      >
+        <LuMail /> nadeesharuwandima@gmail.com
+      </a>
+      <div
+        onClick={() => {
+          navigate("/terms-conditions");
+        }}
+        className="flex flex-row gap-2 justify-center items-center duration-300 ease-in hover:text-blue-800"
+      >
+        <LuScale /> Terms & Conditions
+      </div>
+      <PageFooter color="text-white"/>
     </div>
   );
 };

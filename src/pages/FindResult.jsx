@@ -6,6 +6,7 @@ import {
   ResultCard,
   ResultNotFound,
   ServerNotConnect,
+  StudentFooter,
 } from "../components/UiComponents";
 import { formatDate } from "../utils/utils";
 import { getByIndex } from "../Service/StudentMarksService";
@@ -112,6 +113,7 @@ export default function FindResult() {
         )}
         {noResult ? <ResultNotFound /> : ""}
         {notConnect ? <ServerNotConnect /> : ""}
+        <StudentFooter/>
       </div>
     </div>
   );

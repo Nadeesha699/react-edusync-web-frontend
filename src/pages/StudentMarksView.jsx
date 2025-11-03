@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaPlus } from "react-icons/fa6";
 import logo from "../images/logo.png";
@@ -7,7 +7,6 @@ import StudentMarksDetails from "../components/StudentMarksDetails";
 
 export default function StudentsMarksView() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
 
   return (
     <div className="flex flex-row h-dvh bg-gradient-to-tr from-gray-200 via-blue-200 to-cyan-200">
