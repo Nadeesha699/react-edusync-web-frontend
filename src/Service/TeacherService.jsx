@@ -66,7 +66,6 @@ export const decodeToken = async () => {
   const result = await axios.get(`${appUrl}/teachers/decode`, {
     headers: { Authorization: sessionStorage.getItem("token") },
   });
-  console.log(result.data.user_id);
   return result.data.user_id;
 };
 

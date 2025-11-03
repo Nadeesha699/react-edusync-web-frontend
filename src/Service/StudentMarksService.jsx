@@ -45,7 +45,9 @@ export const updateById = async ({ id, index, name, marks, batch }) => {
 
 export async function getAll() {
   try {
-    const result = await axios.get(`${appUrl}/studentmarks/get-all`);
+    const result = await axios.get(`${appUrl}/studentmarks/get-all`, {
+      headers: { Authorization: sessionStorage.getItem("token") },
+    });
     return result.data;
   } catch (error) {
     throw error;
@@ -76,6 +78,7 @@ export async function getByIndex({ index }) {
 
 export async function deleteById({ id }) {
   try {
+    console.log(id)
     await axios.delete(`${appUrl}/studentmarks/delete-by-id/${id}`, {
       headers: { Authorization: sessionStorage.getItem("token") },
     });

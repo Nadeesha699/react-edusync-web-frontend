@@ -39,7 +39,7 @@ const StudentMarksDetails = () => {
   const [open, setOpen] = useState(false);
   const [username, setUserName] = useState("loading...");
 
-   const handleGetAll = useCallback( async () => {
+  const handleGetAll = useCallback(async () => {
     try {
       const data = await getAll();
       setMarksData(data);
@@ -54,7 +54,7 @@ const StudentMarksDetails = () => {
       setLoadingScreen(false);
       setNotConnect(true);
     }
-  },[navigate])
+  }, [navigate]);
 
   useEffect(() => {
     const checkUser = () => {
@@ -77,8 +77,6 @@ const StudentMarksDetails = () => {
     handleGetAll();
     handelSetUserName();
   }, [searchParams, navigate, handleGetAll]);
-
- 
 
   const handleExportAsCsv = async () => {
     setLoading01(true);
@@ -227,8 +225,15 @@ const StudentMarksDetails = () => {
                               cancelButtonColor: "#327affff",
                             }).then(async (e1) => {
                               if (e1.isConfirmed) {
-                                await deleteById(e.id);
-                                await handleGetAll();
+                                try {
+                                  const id = e.id;
+                                  await deleteById({ id });
+                                  await handleGetAll();
+                                } catch {
+                                  toast.error(
+                                    "Server connection issue. Please try again in a moment."
+                                  );
+                                }
                               }
                             });
                           }}
@@ -319,9 +324,15 @@ const StudentMarksDetails = () => {
                             cancelButtonColor: "#327affff",
                           }).then(async (e1) => {
                             if (e1.isConfirmed) {
-                              const id = e.id;
-                              await deleteById({ id });
-                              await handleGetAll();
+                              try {
+                                const id = e.id;
+                                await deleteById({ id });
+                                await handleGetAll();
+                              } catch {
+                                toast.error(
+                                  "Server connection issue. Please try again in a moment."
+                                );
+                              }
                             }
                           });
                         }}
